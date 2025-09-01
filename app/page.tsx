@@ -1,3 +1,5 @@
+import { Container } from "@/components/container";
+
 export default function HomePage() {
-  return <div>Main page</div>;
+  return <Container>Main page</Container>;
 }
