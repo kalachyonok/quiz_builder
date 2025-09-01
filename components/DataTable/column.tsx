@@ -10,7 +10,13 @@ export const columns: ColumnDef<Quizes>[] = [
   },
   {
     accessorKey: "published",
-    header: "Published",
+    header: () => <div className="text-center">Published</div>,
+    cell: ({ row }) => {
+      const isPublished = row.getValue("published");
+      const formatted = isPublished ? "✔️" : "❌";
+
+      return <div className="text-center">{formatted}</div>;
+    },
   },
   {
     accessorKey: "tags",
