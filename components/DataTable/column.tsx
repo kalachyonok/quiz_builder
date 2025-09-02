@@ -4,6 +4,15 @@ import { Quizes } from "@/constants/quizes";
 import { transformDateFromISO } from "@/utils/transformDate";
 import { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "../ui/badge";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { Button } from "../ui/button";
 
 export const columns: ColumnDef<Quizes>[] = [
   {
@@ -52,6 +61,27 @@ export const columns: ColumnDef<Quizes>[] = [
       const updatedDate = transformDateFromISO(row.getValue("updatedAt"));
 
       return <div className="text-center">{updatedDate}</div>;
+    },
+  },
+  {
+    id: "actions",
+    enableHiding: false,
+    cell: () => {
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              ...
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>View</DropdownMenuItem>
+            <DropdownMenuItem>Edit</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
     },
   },
 ];
