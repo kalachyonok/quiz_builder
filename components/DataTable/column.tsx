@@ -1,7 +1,9 @@
 "use client";
 
 import { Quizes } from "@/constants/quizes";
+import { transformDateFromISO } from "@/utils/transformDate";
 import { ColumnDef } from "@tanstack/react-table";
+import { Badge } from "../ui/badge";
 
 export const columns: ColumnDef<Quizes>[] = [
   {
@@ -20,14 +22,36 @@ export const columns: ColumnDef<Quizes>[] = [
   },
   {
     accessorKey: "tags",
-    header: "Tags",
+    header: () => <div className="text-center">Tags</div>,
+    cell: ({ row }) => {
+      const tags = row.getValue("tags") as string[];
+      const formattedTags = tags.map((tag) => {
+        return (
+          <Badge variant="default" key={tag} className="m-0.5 bg-blue-600">
+            {tag}
+          </Badge>
+        );
+      });
+
+      return <div className="text-center gap-1">{formattedTags}</div>;
+    },
   },
   {
     accessorKey: "createdAt",
-    header: "Created at",
+    header: () => <div className="text-center">Created at</div>,
+    cell: ({ row }) => {
+      const createdDate = transformDateFromISO(row.getValue("createdAt"));
+
+      return <div className="text-center">{createdDate}</div>;
+    },
   },
   {
     accessorKey: "updatedAt",
-    header: "Updated at",
+    header: () => <div className="text-center">Updated at</div>,
+    cell: ({ row }) => {
+      const updatedDate = transformDateFromISO(row.getValue("updatedAt"));
+
+      return <div className="text-center">{updatedDate}</div>;
+    },
   },
 ];
