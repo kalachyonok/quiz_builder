@@ -1,5 +1,3 @@
-"use client";
-
 import { Quizes } from "@/constants/quizes";
 import { transformDateFromISO } from "@/utils/transformDate";
 import { ColumnDef } from "@tanstack/react-table";
@@ -13,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 export const columns: ColumnDef<Quizes>[] = [
   {
@@ -66,7 +65,7 @@ export const columns: ColumnDef<Quizes>[] = [
   {
     id: "actions",
     enableHiding: false,
-    cell: () => {
+    cell: ({ row }) => {
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -77,8 +76,12 @@ export const columns: ColumnDef<Quizes>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View</DropdownMenuItem>
-            <DropdownMenuItem>Edit</DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href={`/quiz/${row.id}`}>View</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link href={`/quiz/edit/${row.id}`}>Edit</Link>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
