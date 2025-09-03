@@ -13,7 +13,7 @@ export type QuizElement = {
     label: string;
   };
 
-  designerComponent: React.FC;
+  designerComponent: React.FC<{ elementInstance: QuizElementInstance }>;
   quizComponent: React.FC;
   propertiesComponent: React.FC;
 };
