@@ -16,7 +16,7 @@ export const Header = () => {
   const isHome = pathname === "/";
 
   return (
-    <header className="border-b border-gray-300">
+    <header className="fixed top-0 left-0 w-full z-50 border-b border-gray-300 bg-amber-50">
       <div className="flex justify-between p-8 items-center">
         <div className="h-11">
           <Link href="/" className={cn(`${orbitron.className} text-2xl`)}>
