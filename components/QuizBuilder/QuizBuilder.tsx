@@ -3,6 +3,7 @@
 import { DndContext } from "@dnd-kit/core";
 import { Canvas } from "./Canvas";
 import { LeftSidebar } from "./LeftSidebar";
+import { DragOverlayWrapper } from "./DragOverlayWrapper";
 
 export const QuizBuilder = () => {
   return (
@@ -15,6 +16,7 @@ export const QuizBuilder = () => {
           <Canvas />
         </div>
       </main>
+      <DragOverlayWrapper />
     </DndContext>
   );
 };

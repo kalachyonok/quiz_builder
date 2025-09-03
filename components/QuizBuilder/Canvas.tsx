@@ -3,7 +3,7 @@
 import { useDroppable } from "@dnd-kit/core";
 
 export const Canvas = () => {
-  const dropable = useDroppable({
+  const droppable = useDroppable({
     id: "drop-area",
     data: {
       isdropArea: true,
