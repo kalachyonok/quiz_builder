@@ -6,6 +6,7 @@ import { QuizElementInstance } from "../QuizBuilder/QuizElements";
 type ElementContextType = {
   elements: QuizElementInstance[];
   addElements: (index: number, element: QuizElementInstance) => void;
+  removeElement: (id: string) => void;
 };
 
 export const ElementContext = createContext<ElementContextType | null>(null);
@@ -25,8 +26,14 @@ export const ElementProvider = ({
     });
   };
 
+  const removeElement = (id: string) => {
+    setElements((prevElements) =>
+      prevElements.filter((element) => element.id !== id)
+    );
+  };
+
   return (
-    <ElementContext.Provider value={{ elements, addElements }}>
+    <ElementContext.Provider value={{ elements, addElements, removeElement }}>
       {children}
     </ElementContext.Provider>
   );

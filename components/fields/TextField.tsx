@@ -48,7 +48,7 @@ function DesignerComponent({
   return (
     <div className="flex flex-col gap-2 w-full text-amber-950">
       <Label>{label}</Label>
-      <Input readOnly disabled placeholder={placeHolder} />
+      <Input placeholder={placeHolder} />
       {helperText && (
         <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>
       )}
