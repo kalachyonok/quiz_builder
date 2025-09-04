@@ -70,17 +70,6 @@ function DesignerComponent({
   );
 }
 
-// function FormComponent({
-//   elementInstance,
-// }: {
-//   elementInstance: QuizElementInstance;
-// }) {
-//   const element = elementInstance as CustomInstance;
-
-//   const { title } = element.extraAttributes;
-//   return <p className="text-xl">{title}</p>;
-// }
-
 type propertiesFormSchemaType = z.infer<typeof propertiesSchema>;
 
 function PropertiesComponent({

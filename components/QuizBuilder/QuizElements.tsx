@@ -1,8 +1,9 @@
 import { IconType } from "react-icons";
 import { TextQuizFormElement } from "../fields/TextField";
 import { TitleFieldFormElement } from "../fields/TitleField";
+import { NumberFieldFormElement } from "../fields/NumberField";
 
-export type ElementsType = "TextField" | "TitleField";
+export type ElementsType = "TextField" | "TitleField" | "NumberField";
 
 export type QuizElement = {
   type: ElementsType;
@@ -32,4 +33,5 @@ type QuizElementsType = {
 export const QuizElements: QuizElementsType = {
   TextField: TextQuizFormElement,
   TitleField: TitleFieldFormElement,
+  NumberField: NumberFieldFormElement,
 };

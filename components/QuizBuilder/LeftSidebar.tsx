@@ -7,6 +7,7 @@ export const LeftSidebar = () => {
       <p className="text-3xl text-muted-foreground font-bold">Elements bar</p>
       <SidebarBtnElement quizElement={QuizElements.TitleField} />
       <SidebarBtnElement quizElement={QuizElements.TextField} />
+      <SidebarBtnElement quizElement={QuizElements.NumberField} />
     </aside>
   );
 };
