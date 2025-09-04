@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Form from "next/form";
+import PreviewBtn from "./QuizBuilder/PreviewBtn";
 
 export const QuizTitle = () => {
   return (
@@ -17,6 +18,7 @@ export const QuizTitle = () => {
       </Form>
 
       <div className="flex gap-2">
+        <PreviewBtn />
         <Button className="bg-emerald-600">Save</Button>
         <Button className="bg-amber-600">Publish</Button>
       </div>

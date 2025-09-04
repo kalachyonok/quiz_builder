@@ -25,7 +25,7 @@ export type QuizElement = {
   };
 
   designerComponent: React.FC<{ elementInstance: QuizElementInstance }>;
-  quizComponent: React.FC;
+  quizComponent: React.FC<{ elementInstance: QuizElementInstance }>;
   propertiesComponent: React.FC<{ elementInstance: QuizElementInstance }>;
   validate: (formElement: QuizElementInstance, currentValue: string) => boolean;
 };
