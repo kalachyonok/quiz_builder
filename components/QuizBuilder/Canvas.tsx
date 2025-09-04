@@ -15,13 +15,12 @@ import { BiSolidTrash } from "react-icons/bi";
 import { CiEdit } from "react-icons/ci";
 
 export const Canvas = () => {
-  const { elements, addElements, selectedElement, setSelectedElement } =
-    useElementContext();
+  const { elements, addElements, removeElement } = useElementContext();
 
   const droppable = useDroppable({
     id: "drop-area",
     data: {
-      isdropArea: true,
+      isDropArea: true,
     },
   });
 
@@ -29,16 +28,87 @@ export const Canvas = () => {
     onDragEnd: (event) => {
       const { over, active } = event;
       if (!active || !over) return;
-
+      // First scenario
       const isDesignerBtnElement = active.data?.current?.isDesignerBtnElement;
 
-      if (isDesignerBtnElement) {
+      const isDroppingOverDesignerDropArea = over.data?.current?.isDropArea;
+
+      const droppingSidebarBtnOverDesignerDropArea =
+        isDesignerBtnElement && isDroppingOverDesignerDropArea;
+
+      if (droppingSidebarBtnOverDesignerDropArea) {
         const type = active.data?.current?.type;
         const newElement = QuizElements[type as ElementsType].construct(
           idGenerator()
         );
 
-        addElements(0, newElement);
+        addElements(elements.length, newElement);
+        return;
+      }
+      // Second scenario
+      const isDroppingOverDesignerElementTopHalf =
+        over.data?.current?.isTopHalfDesignerElement;
+
+      const isDroppingOverDesignerElementBottomHalf =
+        over.data?.current?.isBottomHalfDesignerElement;
+
+      const isDroppingOverDesignerElement =
+        isDroppingOverDesignerElementTopHalf ||
+        isDroppingOverDesignerElementBottomHalf;
+
+      const droppingSidebarBtnOverDesignerElement =
+        isDesignerBtnElement && isDroppingOverDesignerElement;
+
+      if (droppingSidebarBtnOverDesignerElement) {
+        const type = active.data?.current?.type;
+        const newElement = QuizElements[type as ElementsType].construct(
+          idGenerator()
+        );
+
+        const overId = over.data?.current?.elementId;
+
+        const overElementIndex = elements.findIndex((el) => el.id === overId);
+        if (overElementIndex === -1) {
+          throw new Error("element not found");
+        }
+
+        let indexForNewElement = overElementIndex;
+        if (isDroppingOverDesignerElementBottomHalf) {
+          indexForNewElement = overElementIndex + 1;
+        }
+
+        addElements(indexForNewElement, newElement);
+        return;
+      }
+      // Third scenario
+      const isDraggingDesignerElement = active.data?.current?.isDesignerElement;
+
+      const draggingDesignerElementOverAnotherDesignerElement =
+        isDroppingOverDesignerElement && isDraggingDesignerElement;
+
+      if (draggingDesignerElementOverAnotherDesignerElement) {
+        const activeId = active.data?.current?.elementId;
+        const overId = over.data?.current?.elementId;
+
+        const activeElementIndex = elements.findIndex(
+          (el) => el.id === activeId
+        );
+
+        const overElementIndex = elements.findIndex((el) => el.id === overId);
+
+        if (activeElementIndex === -1 || overElementIndex === -1) {
+          throw new Error("element not found");
+        }
+
+        const activeElement = { ...elements[activeElementIndex] };
+        removeElement(activeId);
+
+        let indexForNewElement = overElementIndex;
+        if (isDroppingOverDesignerElementBottomHalf) {
+          indexForNewElement = overElementIndex + 1;
+        }
+
+        addElements(indexForNewElement, activeElement);
       }
     },
   });
@@ -50,11 +120,6 @@ export const Canvas = () => {
         "bg-background max-w-[920px] min-h-[750px] w-full border border-gray-500 rounded-xl flex flex-col items-center justify-start overflow-y-auto p-6",
         droppable.isOver && "bg-green-100 border-green-500"
       )}
-      // onClick={() => {
-      //   if (selectedElement) {
-      //     setSelectedElement(null);
-      //   }
-      // }}
     >
       <p className="text-3xl text-muted-foreground items-center font-bold">
         Drop here
@@ -77,8 +142,7 @@ export const Canvas = () => {
 
 function DesignerElementWrapper({ element }: { element: QuizElementInstance }) {
   const [mouseIsOver, setMouseIsOver] = useState<boolean>(false);
-  const { removeElement, selectedElement, setSelectedElement } =
-    useElementContext();
+  const { removeElement, setSelectedElement } = useElementContext();
 
   const topHalf = useDroppable({
     id: element.id + "-top",
