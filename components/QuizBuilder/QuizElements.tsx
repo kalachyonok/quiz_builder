@@ -2,8 +2,13 @@ import { IconType } from "react-icons";
 import { TextQuizFormElement } from "../fields/TextField";
 import { TitleFieldFormElement } from "../fields/TitleField";
 import { NumberFieldFormElement } from "../fields/NumberField";
+import { SelectFieldFormElement } from "../fields/SelectField";
 
-export type ElementsType = "TextField" | "TitleField" | "NumberField";
+export type ElementsType =
+  | "TextField"
+  | "TitleField"
+  | "NumberField"
+  | "SelectField";
 
 export type QuizElement = {
   type: ElementsType;
@@ -34,4 +39,5 @@ export const QuizElements: QuizElementsType = {
   TextField: TextQuizFormElement,
   TitleField: TitleFieldFormElement,
   NumberField: NumberFieldFormElement,
+  SelectField: SelectFieldFormElement,
 };

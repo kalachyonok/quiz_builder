@@ -8,6 +8,7 @@ export const LeftSidebar = () => {
       <SidebarBtnElement quizElement={QuizElements.TitleField} />
       <SidebarBtnElement quizElement={QuizElements.TextField} />
       <SidebarBtnElement quizElement={QuizElements.NumberField} />
+      <SidebarBtnElement quizElement={QuizElements.SelectField} />
     </aside>
   );
 };
