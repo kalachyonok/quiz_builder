@@ -4,13 +4,15 @@ import { TitleFieldFormElement } from "../fields/TitleField";
 import { NumberFieldFormElement } from "../fields/NumberField";
 import { SelectFieldFormElement } from "../fields/SelectField";
 import { CheckboxFieldFormElement } from "../fields/CheckboxField";
+import { TextAreaFormElement } from "../fields/TextAreaField";
 
 export type ElementsType =
   | "TextField"
   | "TitleField"
   | "NumberField"
   | "SelectField"
-  | "CheckboxField";
+  | "CheckboxField"
+  | "TextAreaField";
 
 export type QuizElement = {
   type: ElementsType;
@@ -43,4 +45,5 @@ export const QuizElements: QuizElementsType = {
   NumberField: NumberFieldFormElement,
   SelectField: SelectFieldFormElement,
   CheckboxField: CheckboxFieldFormElement,
+  TextAreaField: TextAreaFormElement,
 };
