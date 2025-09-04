@@ -10,6 +10,7 @@ type ElementContextType = {
   selectedElement: QuizElementInstance | null;
 
   setSelectedElement: Dispatch<SetStateAction<QuizElementInstance | null>>;
+  updateElement: (id: string, element: QuizElementInstance) => void;
 };
 
 export const ElementContext = createContext<ElementContextType | null>(null);
@@ -37,6 +38,16 @@ export const ElementProvider = ({
     );
   };
 
+  const updateElement = (id: string, element: QuizElementInstance) => {
+    console.log("Updating element:", id, element);
+    setElements((prev) => {
+      const newElements = [...prev];
+      const index = newElements.findIndex((el) => el.id === id);
+      newElements[index] = element;
+      return newElements;
+    });
+  };
+
   return (
     <ElementContext.Provider
       value={{
@@ -45,6 +56,7 @@ export const ElementProvider = ({
         removeElement,
         selectedElement,
         setSelectedElement,
+        updateElement,
       }}
     >
       {children}

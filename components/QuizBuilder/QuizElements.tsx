@@ -15,7 +15,7 @@ export type QuizElement = {
 
   designerComponent: React.FC<{ elementInstance: QuizElementInstance }>;
   quizComponent: React.FC;
-  propertiesComponent: React.FC;
+  propertiesComponent: React.FC<{ elementInstance: QuizElementInstance }>;
 };
 
 export type QuizElementInstance = {
