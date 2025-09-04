@@ -2,7 +2,7 @@
 
 import { useElementContext } from "@/app/hooks/useElementContext";
 import { cn } from "@/lib/utils";
-import { useDndMonitor, useDroppable } from "@dnd-kit/core";
+import { useDndMonitor, useDraggable, useDroppable } from "@dnd-kit/core";
 import {
   ElementsType,
   QuizElementInstance,
@@ -51,7 +51,7 @@ export const Canvas = () => {
       <p className="text-3xl text-muted-foreground items-center font-bold">
         Drop here
       </p>
-      {droppable.isOver && (
+      {droppable.isOver && elements.length === 0 && (
         <div className="p-4 w-full">
           <div className="h-32 w-full border border-dashed border-gray-400 rounded-lg"></div>
         </div>
@@ -89,49 +89,68 @@ function DesignerElementWrapper({ element }: { element: QuizElementInstance }) {
     },
   });
 
+  const draggable = useDraggable({
+    id: element.id + "-drag-handler",
+    data: {
+      type: element.type,
+      elementId: element.id,
+      isDesignerElement: true,
+    },
+  });
+
+  if (draggable.isDragging) return null;
+
   const DesignerComponent = QuizElements[element.type].designerComponent;
 
   return (
-    <div
-      className="relative h-[120px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset"
-      onMouseEnter={() => {
-        setMouseIsOver(true);
-      }}
-      onMouseLeave={() => {
-        setMouseIsOver(false);
-      }}
-    >
+    <div className="flex">
       <div
-        ref={topHalf.setNodeRef}
-        className="absolute w-full h-1/2 rounded-t-md"
-      />
-      <div
-        ref={bottomHalf.setNodeRef}
-        className="absolute w-full bottom-0 h-1/2 rounded-b-md"
-      />
-      {mouseIsOver && (
-        <>
-          <div className="absolute right-0 h-full">
-            <Button
-              variant="outline"
-              className="flex justify-center h-full border rounded-md rounded-l-none bg-red-500"
-              onClick={() => {
-                removeElement(element.id);
-              }}
-            >
-              <BiSolidTrash className="text-white" />
-            </Button>
-          </div>
+        className="relative h-[120px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset w-full"
+        ref={draggable.setNodeRef}
+        {...draggable.listeners}
+        {...draggable.attributes}
+        onMouseEnter={() => {
+          setMouseIsOver(true);
+        }}
+        onMouseLeave={() => {
+          setMouseIsOver(false);
+        }}
+      >
+        <div
+          ref={topHalf.setNodeRef}
+          className="absolute w-full h-1/2 rounded-t-md"
+        />
+        <div
+          ref={bottomHalf.setNodeRef}
+          className="absolute w-full bottom-0 h-1/2 rounded-b-md"
+        />
+        {mouseIsOver && (
           <div className="absolute flex items-center justify-center inset-0 bg-black opacity-50 rounded-md animate-pulse pointer-events-none">
             <p className="text-white text-center">
               Click for properties or drag to move
             </p>
           </div>
-        </>
-      )}
-      <div className="flex w-full h-[120px] items-center border-2 border-dashed border-gray-400 rounded-lg bg-accent/40 px-4 py-2">
-        <DesignerComponent elementInstance={element} />
+        )}
+        <div
+          className={cn(
+            "flex w-full h-[120px] items-center rounded-md bg-accent/40 px-4 py-2",
+            topHalf.isOver && "border-t-4 border-green-600",
+            bottomHalf.isOver && "border-b-4 border-green-600"
+          )}
+        >
+          <DesignerComponent elementInstance={element} />
+        </div>
       </div>
+      <Button
+        draggable={false}
+        variant="outline"
+        className="flex justify-center h-full border rounded-md rounded-l-none bg-red-200 hover:bg-red-600 hover:border-red-600"
+        onClick={() => {
+          removeElement(element.id);
+        }}
+      >
+        <BiSolidTrash className="text-white" />
+      </Button>
     </div>
   );
 }
