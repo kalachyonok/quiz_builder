@@ -12,9 +12,12 @@ import { idGenerator } from "@/utils/idGenerator";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { BiSolidTrash } from "react-icons/bi";
+import { CiEdit } from "react-icons/ci";
 
 export const Canvas = () => {
-  const { elements, addElements } = useElementContext();
+  const { elements, addElements, selectedElement, setSelectedElement } =
+    useElementContext();
+
   const droppable = useDroppable({
     id: "drop-area",
     data: {
@@ -69,7 +72,8 @@ export const Canvas = () => {
 
 function DesignerElementWrapper({ element }: { element: QuizElementInstance }) {
   const [mouseIsOver, setMouseIsOver] = useState<boolean>(false);
-  const { removeElement } = useElementContext();
+  const { removeElement, selectedElement, setSelectedElement } =
+    useElementContext();
 
   const topHalf = useDroppable({
     id: element.id + "-top",
@@ -105,7 +109,7 @@ function DesignerElementWrapper({ element }: { element: QuizElementInstance }) {
   return (
     <div className="flex">
       <div
-        className="relative h-[120px] flex flex-col text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset w-full"
+        className="relative h-[120px] flex flex-col border border-dashed border-gray-400 text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset w-full"
         ref={draggable.setNodeRef}
         {...draggable.listeners}
         {...draggable.attributes}
@@ -144,7 +148,17 @@ function DesignerElementWrapper({ element }: { element: QuizElementInstance }) {
       <Button
         draggable={false}
         variant="outline"
-        className="flex justify-center h-full border rounded-md rounded-l-none bg-red-200 hover:bg-red-600 hover:border-red-600"
+        className="flex justify-center h-full border rounded-md bg-emerald-300 hover:bg-emerald-600 hover:border-emerald-600"
+        onClick={() => {
+          setSelectedElement(element);
+        }}
+      >
+        <CiEdit />
+      </Button>
+      <Button
+        draggable={false}
+        variant="outline"
+        className="flex justify-center h-full border rounded-md bg-red-200 hover:bg-red-600 hover:border-red-600"
         onClick={() => {
           removeElement(element.id);
         }}
