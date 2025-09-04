@@ -52,8 +52,20 @@ export const TextQuizFormElement: QuizElement = {
     label: "Text Field",
   },
   designerComponent: DesignerComponent,
-  quizComponent: () => <div>Quiz Component</div>,
+  quizComponent: () => <div>Text Component</div>,
   propertiesComponent: PropertiesComponent,
+
+  validate: (
+    formElement: QuizElementInstance,
+    currentValue: string
+  ): boolean => {
+    const element = formElement as CustomInstance;
+    if (element.extraAttributes.required) {
+      return currentValue.length > 0;
+    }
+
+    return true;
+  },
 };
 
 type CustomInstance = QuizElementInstance & {

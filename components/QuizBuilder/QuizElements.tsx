@@ -1,7 +1,8 @@
 import { IconType } from "react-icons";
 import { TextQuizFormElement } from "../fields/TextField";
+import { TitleFieldFormElement } from "../fields/TitleField";
 
-export type ElementsType = "TextField";
+export type ElementsType = "TextField" | "TitleField";
 
 export type QuizElement = {
   type: ElementsType;
@@ -16,6 +17,7 @@ export type QuizElement = {
   designerComponent: React.FC<{ elementInstance: QuizElementInstance }>;
   quizComponent: React.FC;
   propertiesComponent: React.FC<{ elementInstance: QuizElementInstance }>;
+  validate: (formElement: QuizElementInstance, currentValue: string) => boolean;
 };
 
 export type QuizElementInstance = {
@@ -29,4 +31,5 @@ type QuizElementsType = {
 };
 export const QuizElements: QuizElementsType = {
   TextField: TextQuizFormElement,
+  TitleField: TitleFieldFormElement,
 };
