@@ -5,6 +5,7 @@ import { QuizElementInstance } from "../QuizBuilder/QuizElements";
 
 type ElementContextType = {
   elements: QuizElementInstance[];
+  setElements: Dispatch<SetStateAction<QuizElementInstance[]>>;
   addElements: (index: number, element: QuizElementInstance) => void;
   removeElement: (id: string) => void;
   selectedElement: QuizElementInstance | null;
@@ -39,7 +40,6 @@ export const ElementProvider = ({
   };
 
   const updateElement = (id: string, element: QuizElementInstance) => {
-    console.log("Updating element:", id, element);
     setElements((prev) => {
       const newElements = [...prev];
       const index = newElements.findIndex((el) => el.id === id);
@@ -52,6 +52,7 @@ export const ElementProvider = ({
     <ElementContext.Provider
       value={{
         elements,
+        setElements,
         addElements,
         removeElement,
         selectedElement,

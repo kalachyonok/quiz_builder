@@ -14,6 +14,8 @@ export type ElementsType =
   | "CheckboxField"
   | "TextAreaField";
 
+export type SubmitFunction = (key: string, value: string) => void;
+
 export type QuizElement = {
   type: ElementsType;
 
@@ -25,7 +27,12 @@ export type QuizElement = {
   };
 
   designerComponent: React.FC<{ elementInstance: QuizElementInstance }>;
-  quizComponent: React.FC<{ elementInstance: QuizElementInstance }>;
+  quizComponent: React.FC<{
+    elementInstance: QuizElementInstance;
+    submitValue?: SubmitFunction;
+    isInvalid?: boolean;
+    defaultValue?: string;
+  }>;
   propertiesComponent: React.FC<{ elementInstance: QuizElementInstance }>;
   validate: (formElement: QuizElementInstance, currentValue: string) => boolean;
 };

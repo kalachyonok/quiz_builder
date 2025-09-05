@@ -45,7 +45,7 @@ export const TitleFieldFormElement: QuizElement = {
     label: "Title field",
   },
   designerComponent: DesignerComponent,
-  quizComponent: () => <div>Title Component</div>,
+  quizComponent: FormComponent,
   propertiesComponent: PropertiesComponent,
 
   validate: () => true,
@@ -68,6 +68,17 @@ function DesignerComponent({
       <p className="text-xl">{title}</p>
     </div>
   );
+}
+
+function FormComponent({
+  elementInstance,
+}: {
+  elementInstance: QuizElementInstance;
+}) {
+  const element = elementInstance as CustomInstance;
+
+  const { title } = element.extraAttributes;
+  return <p className="text-xl">{title}</p>;
 }
 
 type propertiesFormSchemaType = z.infer<typeof propertiesSchema>;

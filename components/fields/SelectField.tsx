@@ -4,13 +4,14 @@ import {
   ElementsType,
   QuizElement,
   QuizElementInstance,
+  SubmitFunction,
 } from "../QuizBuilder/QuizElements";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useElementContext } from "@/app/hooks/useElementContext";
 import { RxDropdownMenu } from "react-icons/rx";
 
@@ -25,10 +26,17 @@ import {
 } from "../ui/form";
 import { Switch } from "../ui/switch";
 
-import { Select, SelectTrigger, SelectValue } from "../ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
 import { AiOutlineClose, AiOutlinePlus } from "react-icons/ai";
+import { cn } from "@/lib/utils";
 
 const type: ElementsType = "SelectField";
 
@@ -60,7 +68,7 @@ export const SelectFieldFormElement: QuizElement = {
     label: "Select Field",
   },
   designerComponent: DesignerComponent,
-  quizComponent: () => <div>Select Component</div>,
+  quizComponent: FormComponent,
   propertiesComponent: PropertiesComponent,
 
   validate: (
@@ -100,6 +108,69 @@ function DesignerComponent({
       </Select>
       {helperText && (
         <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>
+      )}
+    </div>
+  );
+}
+
+function FormComponent({
+  elementInstance,
+  submitValue,
+  isInvalid,
+  defaultValue,
+}: {
+  elementInstance: QuizElementInstance;
+  submitValue?: SubmitFunction;
+  isInvalid?: boolean;
+  defaultValue?: string;
+}) {
+  const element = elementInstance as CustomInstance;
+
+  const [value, setValue] = useState(defaultValue || "");
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setError(isInvalid === true);
+  }, [isInvalid]);
+
+  const { label, required, placeHolder, helperText, options } =
+    element.extraAttributes;
+  return (
+    <div className="flex flex-col gap-2 w-full">
+      <Label className={cn(error && "text-red-500")}>
+        {label}
+        {required && "*"}
+      </Label>
+      <Select
+        defaultValue={value}
+        onValueChange={(value) => {
+          setValue(value);
+          if (!submitValue) return;
+          const valid = SelectFieldFormElement.validate(element, value);
+          setError(!valid);
+          submitValue(element.id, value);
+        }}
+      >
+        <SelectTrigger className={cn("w-full", error && "border-red-500")}>
+          <SelectValue placeholder={placeHolder} />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map((option) => (
+            <SelectItem key={option} value={option}>
+              {option}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+      {helperText && (
+        <p
+          className={cn(
+            "text-muted-foreground text-[0.8rem]",
+            error && "text-red-500"
+          )}
+        >
+          {helperText}
+        </p>
       )}
     </div>
   );

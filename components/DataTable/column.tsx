@@ -66,6 +66,7 @@ export const columns: ColumnDef<Quizes>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
+      console.log(row.original);
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -77,10 +78,10 @@ export const columns: ColumnDef<Quizes>[] = [
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link href={`/quiz/${row.id}`}>View</Link>
+              <Link href={`/quiz/${row.original.id}`}>View</Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href={`/quiz/edit/${row.id}`}>Edit</Link>
+              <Link href={`/quiz/edit/${row.original.id}`}>Edit</Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

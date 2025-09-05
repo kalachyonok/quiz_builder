@@ -1,13 +1,14 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import {
   ElementsType,
   QuizElement,
   QuizElementInstance,
+  SubmitFunction,
 } from "../QuizBuilder/QuizElements";
 
 import { Input } from "../ui/input";
@@ -25,6 +26,7 @@ import {
 } from "../ui/form";
 import { Switch } from "../ui/switch";
 import { useElementContext } from "@/app/hooks/useElementContext";
+import { cn } from "@/lib/utils";
 
 const type: ElementsType = "NumberField";
 
@@ -54,7 +56,7 @@ export const NumberFieldFormElement: QuizElement = {
     label: "Number Field",
   },
   designerComponent: DesignerComponent,
-  quizComponent: () => <div>Number Component</div>,
+  quizComponent: FormComponent,
   propertiesComponent: PropertiesComponent,
 
   validate: (
@@ -90,6 +92,64 @@ function DesignerComponent({
       <Input readOnly disabled type="number" placeholder={placeHolder} />
       {helperText && (
         <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>
+      )}
+    </div>
+  );
+}
+
+function FormComponent({
+  elementInstance,
+  submitValue,
+  isInvalid,
+  defaultValue,
+}: {
+  elementInstance: QuizElementInstance;
+  submitValue?: SubmitFunction;
+  isInvalid?: boolean;
+  defaultValue?: string;
+}) {
+  const element = elementInstance as CustomInstance;
+
+  const [value, setValue] = useState(defaultValue || "");
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setError(isInvalid === true);
+  }, [isInvalid]);
+
+  const { label, required, placeHolder, helperText } = element.extraAttributes;
+  return (
+    <div className="flex flex-col gap-2 w-full">
+      <Label className={cn(error && "text-red-500")}>
+        {label}
+        {required && "*"}
+      </Label>
+      <Input
+        type="number"
+        className={cn(error && "border-red-500")}
+        placeholder={placeHolder}
+        onChange={(e) => setValue(e.target.value)}
+        onBlur={(e) => {
+          if (!submitValue) return;
+          const valid = NumberFieldFormElement.validate(
+            element,
+            e.target.value
+          );
+          setError(!valid);
+          if (!valid) return;
+          submitValue(element.id, e.target.value);
+        }}
+        value={value}
+      />
+      {helperText && (
+        <p
+          className={cn(
+            "text-muted-foreground text-[0.8rem]",
+            error && "text-red-500"
+          )}
+        >
+          {helperText}
+        </p>
       )}
     </div>
   );

@@ -5,13 +5,14 @@ import {
   ElementsType,
   QuizElement,
   QuizElementInstance,
+  SubmitFunction,
 } from "../QuizBuilder/QuizElements";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useElementContext } from "@/app/hooks/useElementContext";
 import {
   Form,
@@ -23,6 +24,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Switch } from "../ui/switch";
+import { cn } from "@/lib/utils";
 
 const type: ElementsType = "TextField";
 
@@ -52,7 +54,7 @@ export const TextQuizFormElement: QuizElement = {
     label: "Text Field",
   },
   designerComponent: DesignerComponent,
-  quizComponent: () => <div>Text Component</div>,
+  quizComponent: FormComponent,
   propertiesComponent: PropertiesComponent,
 
   validate: (
@@ -73,6 +75,81 @@ type CustomInstance = QuizElementInstance & {
 };
 
 type propertiesFormSchemaType = z.infer<typeof propertiesSchema>;
+
+function FormComponent({
+  elementInstance,
+  submitValue,
+  isInvalid,
+  defaultValue,
+}: {
+  elementInstance: QuizElementInstance;
+  submitValue?: SubmitFunction;
+  isInvalid?: boolean;
+  defaultValue?: string;
+}) {
+  const element = elementInstance as CustomInstance;
+
+  const [value, setValue] = useState(defaultValue || "");
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setError(isInvalid === true);
+  }, [isInvalid]);
+
+  const { label, required, placeHolder, helperText } = element.extraAttributes;
+  return (
+    <div className="flex flex-col gap-2 w-full">
+      <Label className={cn(error && "text-red-500")}>
+        {label}
+        {required && "*"}
+      </Label>
+      <Input
+        className={cn(error && "border-red-500")}
+        placeholder={placeHolder}
+        onChange={(e) => setValue(e.target.value)}
+        onBlur={(e) => {
+          if (!submitValue) return;
+          const valid = TextQuizFormElement.validate(element, e.target.value);
+          setError(!valid);
+          if (!valid) return;
+          submitValue(element.id, e.target.value);
+        }}
+        value={value}
+      />
+      {helperText && (
+        <p
+          className={cn(
+            "text-muted-foreground text-[0.8rem]",
+            error && "text-red-500"
+          )}
+        >
+          {helperText}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function DesignerComponent({
+  elementInstance,
+}: {
+  elementInstance: QuizElementInstance;
+}) {
+  const element = elementInstance as CustomInstance;
+  const { label, placeHolder, helperText, required } = element.extraAttributes;
+  return (
+    <div className="flex flex-col gap-2 w-full text-amber-950">
+      <Label>
+        {label}
+        {required && "*"}
+      </Label>
+      <Input placeholder={placeHolder} />
+      {helperText && (
+        <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>
+      )}
+    </div>
+  );
+}
 
 function PropertiesComponent({
   elementInstance,
@@ -205,26 +282,5 @@ function PropertiesComponent({
         />
       </form>
     </Form>
-  );
-}
-
-function DesignerComponent({
-  elementInstance,
-}: {
-  elementInstance: QuizElementInstance;
-}) {
-  const element = elementInstance as CustomInstance;
-  const { label, placeHolder, helperText, required } = element.extraAttributes;
-  return (
-    <div className="flex flex-col gap-2 w-full text-amber-950">
-      <Label>
-        {label}
-        {required && "*"}
-      </Label>
-      <Input placeholder={placeHolder} />
-      {helperText && (
-        <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>
-      )}
-    </div>
   );
 }

@@ -4,13 +4,14 @@ import {
   ElementsType,
   QuizElement,
   QuizElementInstance,
+  SubmitFunction,
 } from "../QuizBuilder/QuizElements";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useElementContext } from "@/app/hooks/useElementContext";
 import { IoMdCheckbox } from "react-icons/io";
 
@@ -25,6 +26,7 @@ import {
 } from "../ui/form";
 import { Switch } from "../ui/switch";
 import { Checkbox } from "../ui/checkbox";
+import { cn } from "@/lib/utils";
 
 const type: ElementsType = "CheckboxField";
 
@@ -52,7 +54,7 @@ export const CheckboxFieldFormElement: QuizElement = {
     label: "CheckBox Field",
   },
   designerComponent: DesignerComponent,
-  quizComponent: () => <div>Checkbox Component</div>,
+  quizComponent: FormComponent,
   propertiesComponent: PropertiesComponent,
 
   validate: (
@@ -90,6 +92,68 @@ function DesignerComponent({
         </Label>
         {helperText && (
           <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function FormComponent({
+  elementInstance,
+  submitValue,
+  isInvalid,
+  defaultValue,
+}: {
+  elementInstance: QuizElementInstance;
+  submitValue?: SubmitFunction;
+  isInvalid?: boolean;
+  defaultValue?: string;
+}) {
+  const element = elementInstance as CustomInstance;
+
+  const [value, setValue] = useState<boolean>(
+    defaultValue === "true" ? true : false
+  );
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    setError(isInvalid === true);
+  }, [isInvalid]);
+
+  const { label, required, helperText } = element.extraAttributes;
+  const id = `checkbox-${element.id}`;
+  return (
+    <div className="flex items-top space-x-2">
+      <Checkbox
+        id={id}
+        checked={value}
+        className={cn(error && "border-red-500")}
+        onCheckedChange={(checked) => {
+          let value = false;
+          if (checked === true) value = true;
+
+          setValue(value);
+          if (!submitValue) return;
+          const stringValue = value ? "true" : "false";
+          const valid = CheckboxFieldFormElement.validate(element, stringValue);
+          setError(!valid);
+          submitValue(element.id, stringValue);
+        }}
+      />
+      <div className="grid gap-1.5 leading-none">
+        <Label htmlFor={id} className={cn(error && "text-red-500")}>
+          {label}
+          {required && "*"}
+        </Label>
+        {helperText && (
+          <p
+            className={cn(
+              "text-muted-foreground text-[0.8rem]",
+              error && "text-red-500"
+            )}
+          >
+            {helperText}
+          </p>
         )}
       </div>
     </div>
