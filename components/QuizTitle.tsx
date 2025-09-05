@@ -8,27 +8,42 @@ import PreviewBtn from "./QuizBuilder/PreviewBtn";
 import { useElementContext } from "@/app/hooks/useElementContext";
 import { useState } from "react";
 import { useQuizContext } from "@/app/hooks/useQuizContext";
+import { toast } from "sonner";
 
 export const QuizTitle = () => {
   const { elements, setElements } = useElementContext();
   const { addQuiz, publishQuiz } = useQuizContext();
   const [currentQuizId, setCurrentQuizId] = useState<number | null>(null);
+
   const [title, setTitle] = useState<string>("");
 
   const onSaveHandler = () => {
-    const currentId = Date.now();
-    const newQuiz = {
-      id: currentId,
-      title: title,
-      tags: ["-"],
-      saved: true,
-      published: false,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      shape: elements,
-    };
-    addQuiz(newQuiz);
-    setCurrentQuizId(currentId);
+    if (title.trim().length === 0) {
+      toast.error("Quiz is not saved - please enter a title");
+      return;
+    } else {
+      const currentId = Date.now();
+      const newQuiz = {
+        id: currentId,
+        title: title,
+        tags: ["-"],
+        saved: true,
+        published: false,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        shape: elements,
+      };
+      addQuiz(newQuiz);
+      setCurrentQuizId(currentId);
+      toast.success("Quiz is saved! You can now publish it.");
+    }
+  };
+
+  const onPublishHandler = () => {
+    publishQuiz(currentQuizId!);
+    setElements([]);
+    setCurrentQuizId(null);
+    toast.success("Quiz is published!");
   };
 
   return (
@@ -57,10 +72,7 @@ export const QuizTitle = () => {
         <Button
           className="bg-amber-600"
           disabled={elements.length === 0 && title.trim().length === 0}
-          onClick={() => {
-            publishQuiz(currentQuizId!);
-            setElements([]);
-          }}
+          onClick={onPublishHandler}
         >
           Publish
         </Button>

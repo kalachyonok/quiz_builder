@@ -39,6 +39,7 @@ export const QuizProvider = ({ children }: { children: React.ReactNode }) => {
       const newQuizzes = [...prev];
       const index = newQuizzes.findIndex((el) => el.id === id);
       newQuizzes[index].published = true;
+      newQuizzes[index].updatedAt = new Date().toISOString();
 
       return newQuizzes;
     });
