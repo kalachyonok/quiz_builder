@@ -14,7 +14,11 @@ import { Button } from "../ui/button";
 import { BiSolidTrash } from "react-icons/bi";
 import { CiEdit } from "react-icons/ci";
 
-export const Canvas = () => {
+export const Canvas = ({
+  buildElements,
+}: {
+  buildElements?: QuizElementInstance[];
+}) => {
   const { elements, addElements, removeElement } = useElementContext();
 
   const droppable = useDroppable({
@@ -129,9 +133,9 @@ export const Canvas = () => {
           <div className="h-32 w-full border border-dashed border-gray-400 rounded-lg"></div>
         </div>
       )}
-      {elements.length > 0 && (
+      {(buildElements ? buildElements.length > 0 : elements.length > 0) && (
         <div className="flex flex-col w-full gap-2 p-4">
-          {elements.map((el) => (
+          {(buildElements ?? elements).map((el) => (
             <DesignerElementWrapper key={el.id} element={el} />
           ))}
         </div>
