@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ElementProvider } from "@/components/context/ElementContext";
-import { Toaster } from "@/components/ui/sonner";
+import { QuizProvider } from "@/components/context/QuizContext";
 
 export const metadata: Metadata = {
   title: "Quiz Builder",
@@ -15,10 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <ElementProvider>
-        <body className="antialiased">{children}</body>
-        {/* <Toaster /> */}
-      </ElementProvider>
+      <QuizProvider>
+        <ElementProvider>
+          <body className="antialiased">{children}</body>
+        </ElementProvider>
+      </QuizProvider>
     </html>
   );
 }

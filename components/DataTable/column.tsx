@@ -66,7 +66,6 @@ export const columns: ColumnDef<Quizes>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      console.log(row.original);
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

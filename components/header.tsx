@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Orbitron } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { QuizTitle } from "./QuizTitle";
-import { usePathname } from "next/navigation";
 
 const orbitron = Orbitron({
   weight: "700",
@@ -12,9 +11,6 @@ const orbitron = Orbitron({
 });
 
 export const Header = () => {
-  const pathname = usePathname();
-  const isHome = pathname === "/";
-
   return (
     <header className="fixed top-0 left-0 w-full z-50 border-b border-gray-300 bg-amber-50">
       <div className="flex justify-between p-8 items-center">
@@ -23,7 +19,7 @@ export const Header = () => {
             Quiz Builder
           </Link>
         </div>
-        {isHome ? null : <QuizTitle />}
+        <QuizTitle />
       </div>
     </header>
   );
