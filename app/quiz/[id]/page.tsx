@@ -3,13 +3,14 @@
 import { Container } from "@/components/container";
 import { QuizElements } from "@/components/QuizBuilder/QuizElements";
 import { useParams } from "next/navigation";
-import { QUIZES } from "@/constants/quizes";
 import { Header } from "@/components/header";
+import { useQuizContext } from "@/app/hooks/useQuizContext";
 
 export default function QuizPage() {
   const { id } = useParams();
+  const { quizzes } = useQuizContext();
 
-  const quiz = QUIZES.find((quiz) => quiz.id === Number(id));
+  const quiz = quizzes.find((quiz) => quiz.id === Number(id));
 
   return (
     <Container>
