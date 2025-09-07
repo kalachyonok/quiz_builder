@@ -10,7 +10,13 @@ const orbitron = Orbitron({
   subsets: ["latin"],
 });
 
-export const Header = ({ quizId }: { quizId?: number }) => {
+export const Header = ({
+  quizId,
+  viewMode,
+}: {
+  quizId?: number;
+  viewMode?: boolean;
+}) => {
   return (
     <header className="fixed top-0 left-0 w-full z-50 border-b border-gray-300 bg-amber-50">
       <div className="flex justify-between p-8 items-center">
@@ -19,7 +25,7 @@ export const Header = ({ quizId }: { quizId?: number }) => {
             Quiz Builder
           </Link>
         </div>
-        <QuizTitle quizId={quizId} />
+        <QuizTitle quizId={quizId} viewMode={viewMode} />
       </div>
     </header>
   );

@@ -14,7 +14,7 @@ export default function QuizPage() {
 
   return (
     <Container>
-      <Header />
+      <Header quizId={Number(id)} viewMode={true} />
       <div className="bg-accent min-h-screen flex flex-col items-center justify-center p-4 bg-[url(/paper.svg)] overflow-y-auto">
         <div className="max-w-[620px] flex flex-col gap-4 bg-background h-full w-full rounded-2xl p-8 overflow-y-auto">
           {!quiz && <p className="text-center">Quiz not found.</p>}

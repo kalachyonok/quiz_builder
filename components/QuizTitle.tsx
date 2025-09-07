@@ -10,7 +10,13 @@ import { useState, useEffect } from "react";
 import { useQuizContext } from "@/app/hooks/useQuizContext";
 import { toast } from "sonner";
 
-export const QuizTitle = ({ quizId }: { quizId?: number }) => {
+export const QuizTitle = ({
+  quizId,
+  viewMode,
+}: {
+  quizId?: number;
+  viewMode?: boolean;
+}) => {
   const { elements, setElements } = useElementContext();
   const { addQuiz, publishQuiz, quizzes } = useQuizContext();
   const [currentQuizId, setCurrentQuizId] = useState<number | null>(
@@ -20,7 +26,6 @@ export const QuizTitle = ({ quizId }: { quizId?: number }) => {
   const existingQuiz = quizId ? quizzes.find((q) => q.id === quizId) : null;
   const [title, setTitle] = useState<string>(existingQuiz?.title || "");
 
-  // Sync with existing quiz when editing
   useEffect(() => {
     if (quizId && existingQuiz) {
       setTitle(existingQuiz.title);
@@ -71,12 +76,22 @@ export const QuizTitle = ({ quizId }: { quizId?: number }) => {
       return;
     }
     publishQuiz(currentQuizId);
-    // Always clear state after publishing
+
     setElements([]);
     setCurrentQuizId(null);
     setTitle("");
     toast.success("Quiz is published!");
   };
+
+  if (viewMode) {
+    return (
+      <div className="flex justify-center items-center">
+        <h1 className="text-2xl font-bold text-gray-800">
+          {existingQuiz?.title || "Quiz Title"}
+        </h1>
+      </div>
+    );
+  }
 
   return (
     <div className="flex justify-end items-end gap-10">
