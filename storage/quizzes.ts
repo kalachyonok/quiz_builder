@@ -49,31 +49,47 @@ export function seedQuizzesIfNeeded(seed: Quizzes[]): void {
   try {
     const initialized = window.localStorage.getItem(INIT_KEY);
     if (initialized) return;
+
     const existing = getQuizzes();
     if (existing.length === 0) {
       setQuizzes(seed);
-    }
-    const after = getQuizzes();
-    if (after.length > 0) {
-      window.localStorage.setItem(INIT_KEY, "true");
+
+      const after = getQuizzes();
+      if (after.length > 0) {
+        window.localStorage.setItem(INIT_KEY, "true");
+      } else {
+        toast.error("Failed to seed quizzes (storage quota?)");
+      }
     } else {
-      toast.error("Failed to seed quizzes (storage quota?)");
+      window.localStorage.setItem(INIT_KEY, "true");
     }
-  } catch {
-    // ignore
+  } catch (error) {
+    console.error("Error seeding quizzes:", error);
   }
 }
 
-export function upsertQuiz(newQuiz: Quizzes): void {
-  const quizzes = getQuizzes();
+export function upsertQuiz(newQuiz: Quizzes, seedQuizzes: Quizzes[]): void {
+  let quizzes = getQuizzes();
+
+  // If localStorage is empty or corrupted, restore seed quizzes
+  if (quizzes.length === 0) {
+    quizzes = [...seedQuizzes];
+  }
+
   const index = quizzes.findIndex((q) => q.id === newQuiz.id);
   if (index === -1) quizzes.push(newQuiz);
   else quizzes[index] = newQuiz;
   setQuizzes(quizzes);
 }
 
-export function publishQuizById(id: number): void {
-  const quizzes = getQuizzes();
+export function publishQuizById(id: number, seedQuizzes: Quizzes[]): void {
+  let quizzes = getQuizzes();
+
+  // If localStorage is empty or corrupted, restore seed quizzes
+  if (quizzes.length === 0) {
+    quizzes = [...seedQuizzes];
+  }
+
   const index = quizzes.findIndex((q) => q.id === id);
   if (index === -1) return;
   quizzes[index].published = true;
@@ -81,7 +97,14 @@ export function publishQuizById(id: number): void {
   setQuizzes(quizzes);
 }
 
-export function removeQuizById(id: number): void {
-  const quizzes = getQuizzes().filter((q) => q.id !== id);
+export function removeQuizById(id: number, seedQuizzes: Quizzes[]): void {
+  let quizzes = getQuizzes();
+
+  // If localStorage is empty or corrupted, restore seed quizzes
+  if (quizzes.length === 0) {
+    quizzes = [...seedQuizzes];
+  }
+
+  quizzes = quizzes.filter((q) => q.id !== id);
   setQuizzes(quizzes);
 }

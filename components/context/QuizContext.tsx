@@ -7,7 +7,6 @@ import {
   publishQuizById,
   removeQuizById,
   seedQuizzesIfNeeded,
-  setQuizzes,
   upsertQuiz,
 } from "@/storage/quizzes";
 
@@ -30,18 +29,14 @@ export const QuizProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     seedQuizzesIfNeeded(QUIZZES);
-    let loaded = getQuizzes();
-    if (loaded.length === 0) {
-      setQuizzes(QUIZZES);
-      loaded = getQuizzes();
-    }
+    const loaded = getQuizzes();
     setQuizzesState(loaded.length ? loaded : QUIZZES);
   }, []);
 
   const addQuiz = (newQuiz: Quizzes) => {
     setQuizzesState((prev) => {
       const updated = [...prev, newQuiz];
-      upsertQuiz(newQuiz);
+      upsertQuiz(newQuiz, QUIZZES);
       return updated;
     });
   };
@@ -49,7 +44,7 @@ export const QuizProvider = ({ children }: { children: React.ReactNode }) => {
   const removeQuiz = (id: number) => {
     setQuizzesState((prev) => {
       const updated = prev.filter((element) => element.id !== id);
-      removeQuizById(id);
+      removeQuizById(id, QUIZZES);
       return updated;
     });
   };
@@ -61,7 +56,7 @@ export const QuizProvider = ({ children }: { children: React.ReactNode }) => {
           ? { ...q, published: true, updatedAt: new Date().toISOString() }
           : q
       );
-      publishQuizById(id);
+      publishQuizById(id, QUIZZES);
       return updated;
     });
   };
