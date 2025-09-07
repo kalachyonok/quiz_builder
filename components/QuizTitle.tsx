@@ -6,43 +6,75 @@ import { Label } from "@/components/ui/label";
 import Form from "next/form";
 import PreviewBtn from "./QuizBuilder/PreviewBtn";
 import { useElementContext } from "@/app/hooks/useElementContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuizContext } from "@/app/hooks/useQuizContext";
 import { toast } from "sonner";
 
-export const QuizTitle = () => {
+export const QuizTitle = ({ quizId }: { quizId?: number }) => {
   const { elements, setElements } = useElementContext();
-  const { addQuiz, publishQuiz } = useQuizContext();
-  const [currentQuizId, setCurrentQuizId] = useState<number | null>(null);
+  const { addQuiz, publishQuiz, quizzes } = useQuizContext();
+  const [currentQuizId, setCurrentQuizId] = useState<number | null>(
+    quizId || null
+  );
 
-  const [title, setTitle] = useState<string>("");
+  const existingQuiz = quizId ? quizzes.find((q) => q.id === quizId) : null;
+  const [title, setTitle] = useState<string>(existingQuiz?.title || "");
+
+  // Sync with existing quiz when editing
+  useEffect(() => {
+    if (quizId && existingQuiz) {
+      setTitle(existingQuiz.title);
+      setCurrentQuizId(quizId);
+      setElements(existingQuiz.shape);
+    }
+  }, [quizId, existingQuiz, setElements]);
 
   const onSaveHandler = () => {
     if (title.trim().length === 0) {
       toast.error("Quiz is not saved - please enter a title");
       return;
     } else {
-      const currentId = Date.now();
-      const newQuiz = {
-        id: currentId,
-        title: title,
-        tags: ["-"],
-        saved: true,
-        published: false,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        shape: elements,
-      };
-      addQuiz(newQuiz);
-      setCurrentQuizId(currentId);
-      toast.success("Quiz is saved! You can now publish it.");
+      if (currentQuizId) {
+        // Update existing quiz
+        const updatedQuiz = {
+          ...existingQuiz!,
+          id: currentQuizId,
+          title: title,
+          updatedAt: new Date().toISOString(),
+          shape: elements,
+        };
+        addQuiz(updatedQuiz);
+        toast.success("Quiz is updated!");
+      } else {
+        // Create new quiz
+        const currentId = Date.now();
+        const newQuiz = {
+          id: currentId,
+          title: title,
+          tags: ["-"],
+          saved: true,
+          published: false,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
+          shape: elements,
+        };
+        addQuiz(newQuiz);
+        setCurrentQuizId(currentId);
+        toast.success("Quiz is saved! You can now publish it.");
+      }
     }
   };
 
   const onPublishHandler = () => {
-    publishQuiz(currentQuizId!);
+    if (!currentQuizId) {
+      toast.error("No quiz to publish");
+      return;
+    }
+    publishQuiz(currentQuizId);
+    // Always clear state after publishing
     setElements([]);
     setCurrentQuizId(null);
+    setTitle("");
     toast.success("Quiz is published!");
   };
 
