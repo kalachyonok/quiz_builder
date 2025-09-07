@@ -22,17 +22,28 @@ export const QuizTitle = ({
   const [currentQuizId, setCurrentQuizId] = useState<number | null>(
     quizId || null
   );
+  const [isPublished, setIsPublished] = useState<boolean>(false);
 
   const existingQuiz = quizId ? quizzes.find((q) => q.id === quizId) : null;
   const [title, setTitle] = useState<string>(existingQuiz?.title || "");
 
   useEffect(() => {
-    if (quizId && existingQuiz) {
+    if (quizId && existingQuiz && !isPublished) {
       setTitle(existingQuiz.title);
       setCurrentQuizId(quizId);
       setElements(existingQuiz.shape);
     }
-  }, [quizId, existingQuiz, setElements]);
+  }, [quizId, existingQuiz, setElements, isPublished]);
+
+  // Reset state when switching between new quiz creation and editing
+  useEffect(() => {
+    if (!quizId) {
+      setIsPublished(false);
+      setCurrentQuizId(null);
+      setTitle("");
+      setElements([]);
+    }
+  }, [quizId, setElements]);
 
   const onSaveHandler = () => {
     if (title.trim().length === 0) {
@@ -76,6 +87,7 @@ export const QuizTitle = ({
       return;
     }
     publishQuiz(currentQuizId);
+    setIsPublished(true);
 
     setElements([]);
     setCurrentQuizId(null);
