@@ -1,4 +1,3 @@
-import { Quizes } from "@/constants/quizes";
 import { transformDateFromISO } from "@/utils/transformDate";
 import { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "../ui/badge";
@@ -12,8 +11,9 @@ import {
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { Quizzes } from "@/constants/quizes";
 
-export const columns: ColumnDef<Quizes>[] = [
+export const columns: ColumnDef<Quizzes>[] = [
   {
     accessorKey: "title",
     header: "Title",

@@ -1,11 +1,18 @@
 "use client";
 
-import { createContext, useState } from "react";
-import { QUIZES, Quizes } from "@/constants/quizes";
+import { createContext, useEffect, useState } from "react";
+import { Quizzes, QUIZZES } from "@/constants/quizes";
+import {
+  getQuizzes,
+  publishQuizById,
+  removeQuizById,
+  seedQuizzesIfNeeded,
+  upsertQuiz,
+} from "@/storage/quizzes";
 
 type QuizContextType = {
-  quizzes: Quizes[];
-  addQuiz: (newQuiz: Quizes) => void;
+  quizzes: Quizzes[];
+  addQuiz: (newQuiz: Quizzes) => void;
   removeQuiz: (id: number) => void;
   publishQuiz: (id: number) => void;
 };
@@ -18,30 +25,39 @@ export const QuizContext = createContext<QuizContextType>({
 });
 
 export const QuizProvider = ({ children }: { children: React.ReactNode }) => {
-  const [quizzes, setQuizzes] = useState<Quizes[]>(QUIZES);
+  const [quizzes, setQuizzesState] = useState<Quizzes[]>([]);
 
-  const addQuiz = (newQuiz: Quizes) => {
-    setQuizzes((prevElements) => {
-      const newElements = [...prevElements, newQuiz];
+  useEffect(() => {
+    seedQuizzesIfNeeded(QUIZZES);
+    const loaded = getQuizzes();
+    setQuizzesState(loaded.length ? loaded : QUIZZES);
+  }, []);
 
-      return newElements;
+  const addQuiz = (newQuiz: Quizzes) => {
+    setQuizzesState((prev) => {
+      const updated = [...prev, newQuiz];
+      upsertQuiz(newQuiz);
+      return updated;
     });
   };
 
   const removeQuiz = (id: number) => {
-    setQuizzes((prevElements) =>
-      prevElements.filter((element) => element.id !== id)
-    );
+    setQuizzesState((prev) => {
+      const updated = prev.filter((element) => element.id !== id);
+      removeQuizById(id);
+      return updated;
+    });
   };
 
   const publishQuiz = (id: number) => {
-    setQuizzes((prev) => {
-      const newQuizzes = [...prev];
-      const index = newQuizzes.findIndex((el) => el.id === id);
-      newQuizzes[index].published = true;
-      newQuizzes[index].updatedAt = new Date().toISOString();
-
-      return newQuizzes;
+    setQuizzesState((prev) => {
+      const updated = prev.map((q) =>
+        q.id === id
+          ? { ...q, published: true, updatedAt: new Date().toISOString() }
+          : q
+      );
+      publishQuizById(id);
+      return updated;
     });
   };
 

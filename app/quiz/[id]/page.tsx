@@ -17,10 +17,15 @@ export default function QuizPage() {
       <Header />
       <div className="bg-accent min-h-screen flex flex-col items-center justify-center p-4 bg-[url(/paper.svg)] overflow-y-auto">
         <div className="max-w-[620px] flex flex-col gap-4 bg-background h-full w-full rounded-2xl p-8 overflow-y-auto">
-          {quiz?.shape.map((element) => {
-            const QuizComponent = QuizElements[element.type].quizComponent;
-            return <QuizComponent key={quiz?.id} elementInstance={element} />;
-          })}
+          {!quiz && <p className="text-center">Quiz not found.</p>}
+          {quiz && !quiz.published && (
+            <p className="text-center">Not published yet.</p>
+          )}
+          {quiz?.published &&
+            quiz.shape.map((element) => {
+              const QuizComponent = QuizElements[element.type].quizComponent;
+              return <QuizComponent key={quiz?.id} elementInstance={element} />;
+            })}
         </div>
       </div>
     </Container>
