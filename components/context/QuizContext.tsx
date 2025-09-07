@@ -7,6 +7,7 @@ import {
   publishQuizById,
   removeQuizById,
   seedQuizzesIfNeeded,
+  setQuizzes,
   upsertQuiz,
 } from "@/storage/quizzes";
 
@@ -29,7 +30,11 @@ export const QuizProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     seedQuizzesIfNeeded(QUIZZES);
-    const loaded = getQuizzes();
+    let loaded = getQuizzes();
+    if (loaded.length === 0) {
+      setQuizzes(QUIZZES);
+      loaded = getQuizzes();
+    }
     setQuizzesState(loaded.length ? loaded : QUIZZES);
   }, []);
 

@@ -18,7 +18,7 @@ function safeParse(json: string | null): Quizzes[] {
   }
 }
 
-function safeStringify(value: unknown): string | null {
+function safeStringify(value: Quizzes[]): string | null {
   try {
     return JSON.stringify(value);
   } catch {
@@ -53,7 +53,12 @@ export function seedQuizzesIfNeeded(seed: Quizzes[]): void {
     if (existing.length === 0) {
       setQuizzes(seed);
     }
-    window.localStorage.setItem(INIT_KEY, "true");
+    const after = getQuizzes();
+    if (after.length > 0) {
+      window.localStorage.setItem(INIT_KEY, "true");
+    } else {
+      toast.error("Failed to seed quizzes (storage quota?)");
+    }
   } catch {
     // ignore
   }
