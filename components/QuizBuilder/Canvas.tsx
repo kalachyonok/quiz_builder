@@ -146,7 +146,8 @@ export const Canvas = ({
 
 function DesignerElementWrapper({ element }: { element: QuizElementInstance }) {
   const [mouseIsOver, setMouseIsOver] = useState<boolean>(false);
-  const { removeElement, setSelectedElement } = useElementContext();
+  const { removeElement, setSelectedElement, selectedElement } =
+    useElementContext();
 
   const topHalf = useDroppable({
     id: element.id + "-top",
@@ -234,6 +235,10 @@ function DesignerElementWrapper({ element }: { element: QuizElementInstance }) {
         className="flex justify-center h-full border rounded-md bg-red-200 hover:bg-red-600 hover:border-red-600"
         onClick={() => {
           removeElement(element.id);
+
+          if (selectedElement?.id === element.id) {
+            setSelectedElement(null);
+          }
         }}
       >
         <BiSolidTrash className="text-white" />
