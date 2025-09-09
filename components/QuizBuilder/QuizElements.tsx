@@ -5,6 +5,7 @@ import { NumberFieldFormElement } from "../fields/NumberField";
 import { SelectFieldFormElement } from "../fields/SelectField";
 import { CheckboxFieldFormElement } from "../fields/CheckboxField";
 import { TextAreaFormElement } from "../fields/TextAreaField";
+import { RadioFieldFormElement } from "../fields/RadioField";
 
 export type ElementsType =
   | "TextField"
@@ -12,7 +13,8 @@ export type ElementsType =
   | "NumberField"
   | "SelectField"
   | "CheckboxField"
-  | "TextAreaField";
+  | "TextAreaField"
+  | "RadioField";
 
 export type SubmitFunction = (key: string, value: string) => void;
 
@@ -53,4 +55,5 @@ export const QuizElements: QuizElementsType = {
   SelectField: SelectFieldFormElement,
   CheckboxField: CheckboxFieldFormElement,
   TextAreaField: TextAreaFormElement,
+  RadioField: RadioFieldFormElement,
 };

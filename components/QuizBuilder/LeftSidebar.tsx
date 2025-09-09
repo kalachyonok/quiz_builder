@@ -11,6 +11,7 @@ export const LeftSidebar = () => {
       <SidebarBtnElement quizElement={QuizElements.SelectField} />
       <SidebarBtnElement quizElement={QuizElements.CheckboxField} />
       <SidebarBtnElement quizElement={QuizElements.TextAreaField} />
+      <SidebarBtnElement quizElement={QuizElements.RadioField} />
     </aside>
   );
 };
