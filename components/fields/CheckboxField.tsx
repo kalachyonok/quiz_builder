@@ -26,6 +26,9 @@ import {
 } from "../ui/form";
 import { Switch } from "../ui/switch";
 import { Checkbox } from "../ui/checkbox";
+import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
+import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
 import { cn } from "@/lib/utils";
 
 const type: ElementsType = "CheckboxField";
@@ -34,12 +37,14 @@ const extraAttributes = {
   label: "Checkbox field",
   helperText: "Helper text",
   required: false,
+  options: ["Option 1", "Option 2"],
 };
 
 const propertiesSchema = z.object({
   label: z.string().min(2).max(50),
   helperText: z.string().max(200),
   required: z.boolean().default(false).optional(),
+  options: z.array(z.string().min(1)).default([]).optional(),
 });
 
 export const CheckboxFieldFormElement: QuizElement = {
@@ -51,7 +56,7 @@ export const CheckboxFieldFormElement: QuizElement = {
   }),
   quizBtnElement: {
     icon: IoMdCheckbox,
-    label: "CheckBox Field",
+    label: "Checkbox Field",
   },
   designerComponent: DesignerComponent,
   quizComponent: FormComponent,
@@ -62,11 +67,8 @@ export const CheckboxFieldFormElement: QuizElement = {
     currentValue: string
   ): boolean => {
     const element = formElement as CustomInstance;
-    if (element.extraAttributes.required) {
-      return currentValue === "true";
-    }
-
-    return true;
+    if (!element.extraAttributes.required) return true;
+    return currentValue.trim().length > 0;
   },
 };
 
@@ -80,20 +82,27 @@ function DesignerComponent({
   elementInstance: QuizElementInstance;
 }) {
   const element = elementInstance as CustomInstance;
-  const { label, required, helperText } = element.extraAttributes;
-  const id = `checkbox-${element.id}`;
+  const { label, required, helperText, options } = element.extraAttributes;
   return (
-    <div className="flex items-top space-x-2">
-      <Checkbox id={id} />
-      <div className="grid gap-1.5 leading-none">
-        <Label htmlFor={id}>
-          {label}
-          {required && "*"}
-        </Label>
-        {helperText && (
-          <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>
-        )}
+    <div className="flex flex-col gap-2 w-full">
+      <Label>
+        {label}
+        {required && "*"}
+      </Label>
+      <div className="flex flex-col gap-2">
+        {options.map((opt) => {
+          const id = `${element.id}-${opt}`;
+          return (
+            <div key={opt} className="flex items-center space-x-2">
+              <Checkbox id={id} disabled />
+              <Label htmlFor={id}>{opt}</Label>
+            </div>
+          );
+        })}
       </div>
+      {helperText && (
+        <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>
+      )}
     </div>
   );
 }
@@ -111,8 +120,13 @@ function FormComponent({
 }) {
   const element = elementInstance as CustomInstance;
 
-  const [value, setValue] = useState<boolean>(
-    defaultValue === "true" ? true : false
+  const [selected, setSelected] = useState<string[]>(
+    defaultValue
+      ? defaultValue
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean)
+      : []
   );
   const [error, setError] = useState(false);
 
@@ -120,42 +134,58 @@ function FormComponent({
     setError(isInvalid === true);
   }, [isInvalid]);
 
-  const { label, required, helperText } = element.extraAttributes;
-  const id = `checkbox-${element.id}`;
-  return (
-    <div className="flex items-top space-x-2">
-      <Checkbox
-        id={id}
-        checked={value}
-        className={cn(error && "border-red-500")}
-        onCheckedChange={(checked) => {
-          let value = false;
-          if (checked === true) value = true;
+  const { label, required, helperText, options } = element.extraAttributes;
 
-          setValue(value);
-          if (!submitValue) return;
-          const stringValue = value ? "true" : "false";
-          const valid = CheckboxFieldFormElement.validate(element, stringValue);
-          setError(!valid);
-          submitValue(element.id, stringValue);
-        }}
-      />
-      <div className="grid gap-1.5 leading-none">
-        <Label htmlFor={id} className={cn(error && "text-red-500")}>
-          {label}
-          {required && "*"}
-        </Label>
-        {helperText && (
-          <p
-            className={cn(
-              "text-muted-foreground text-[0.8rem]",
-              error && "text-red-500"
-            )}
-          >
-            {helperText}
-          </p>
+  function toggleOption(opt: string) {
+    const exists = selected.includes(opt);
+    const newSelected = exists
+      ? selected.filter((o) => o !== opt)
+      : selected.concat(opt);
+    setSelected(newSelected);
+    if (!submitValue) return;
+    const stringValue = newSelected.join(",");
+    const valid = CheckboxFieldFormElement.validate(element, stringValue);
+    setError(!valid);
+    submitValue(element.id, stringValue);
+  }
+
+  return (
+    <div className="flex flex-col gap-2 w-full">
+      <Label className={cn(error && "text-red-500")}>
+        {label}
+        {required && "*"}
+      </Label>
+      <div
+        className={cn(
+          "flex flex-col gap-2",
+          error && "border-red-500/50 rounded-md p-1"
         )}
+      >
+        {options.map((opt) => {
+          const id = `${element.id}-${opt}`;
+          const checked = selected.includes(opt);
+          return (
+            <div key={opt} className="flex items-center space-x-2">
+              <Checkbox
+                id={id}
+                checked={checked}
+                onCheckedChange={() => toggleOption(opt)}
+              />
+              <Label htmlFor={id}>{opt}</Label>
+            </div>
+          );
+        })}
       </div>
+      {helperText && (
+        <p
+          className={cn(
+            "text-muted-foreground text-[0.8rem]",
+            error && "text-red-500"
+          )}
+        >
+          {helperText}
+        </p>
+      )}
     </div>
   );
 }
@@ -167,14 +197,15 @@ function PropertiesComponent({
   elementInstance: QuizElementInstance;
 }) {
   const element = elementInstance as CustomInstance;
-  const { updateElement } = useElementContext();
+  const { updateElement, setSelectedElement } = useElementContext();
   const form = useForm<propertiesFormSchemaType>({
     resolver: zodResolver(propertiesSchema),
-    mode: "onBlur",
+    mode: "onSubmit",
     defaultValues: {
       label: element.extraAttributes.label,
       helperText: element.extraAttributes.helperText,
       required: element.extraAttributes.required,
+      options: element.extraAttributes.options,
     },
   });
 
@@ -183,26 +214,22 @@ function PropertiesComponent({
   }, [element, form]);
 
   function applyChanges(values: propertiesFormSchemaType) {
-    const { label, helperText, required } = values;
+    const { label, helperText, required, options } = values;
     updateElement(element.id, {
       ...element,
       extraAttributes: {
         label,
         helperText,
         required,
+        options,
       },
     });
+    setSelectedElement(null);
   }
 
   return (
     <Form {...form}>
-      <form
-        onBlur={form.handleSubmit(applyChanges)}
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-        className="space-y-3"
-      >
+      <form onSubmit={form.handleSubmit(applyChanges)} className="space-y-3">
         <FormField
           control={form.control}
           name="label"
@@ -247,6 +274,64 @@ function PropertiesComponent({
             </FormItem>
           )}
         />
+        <Separator />
+        <FormField
+          control={form.control}
+          name="options"
+          render={({ field }) => (
+            <FormItem>
+              <div className="flex justify-between items-center">
+                <FormLabel>Options</FormLabel>
+                <Button
+                  variant="outline"
+                  className="gap-2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    form.setValue("options", field.value?.concat("New option"));
+                  }}
+                >
+                  <AiOutlinePlus />
+                  Add
+                </Button>
+              </div>
+              <div className="flex flex-col gap-2">
+                {form.watch("options")?.map((option, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between gap-1"
+                  >
+                    <Input
+                      placeholder=""
+                      value={option}
+                      onChange={(e) => {
+                        (field.value || [])[index] = e.target.value;
+                        field.onChange(field.value);
+                      }}
+                    />
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const newOptions = [...(field.value || [])];
+                        newOptions.splice(index, 1);
+                        field.onChange(newOptions);
+                      }}
+                    >
+                      <AiOutlineClose />
+                    </Button>
+                  </div>
+                ))}
+              </div>
+
+              <FormDescription>
+                Define the checkbox options users can select (multiple allowed).
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Separator />
         <FormField
           control={form.control}
           name="required"
@@ -255,8 +340,7 @@ function PropertiesComponent({
               <div className="space-y-0.5">
                 <FormLabel>Required</FormLabel>
                 <FormDescription>
-                  The helper text of the field. <br />
-                  It will be displayed below the field.
+                  Require at least one option to be selected.
                 </FormDescription>
               </div>
               <FormControl>
@@ -269,6 +353,10 @@ function PropertiesComponent({
             </FormItem>
           )}
         />
+        <Separator />
+        <Button className="w-full" type="submit">
+          Save
+        </Button>
       </form>
     </Form>
   );
