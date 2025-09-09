@@ -1,8 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Quiz Builder 🧩
 
-## Getting Started
+A modern, drag-and-drop quiz creation tool built with **Next.js 15** and **React 19**. Create interactive quizzes with an intuitive visual interface, real-time editing, and comprehensive form field support.
 
-First, run the development server:
+## ✨ Features
+
+- **🎯 Drag & Drop Interface**: Intuitive quiz building with smooth drag-and-drop functionality
+- **📝 Multiple Field Types**: Support for text, number, checkbox, radio, select, and textarea fields
+- **👁️ Live Preview**: Real-time preview of your quiz as you build
+- **💾 Local Storage**: Automatic saving of your quizzes in browser storage
+- **📱 Responsive Design**: Works seamlessly on desktop and mobile devices
+- **🎨 Modern UI**: Built with Tailwind CSS and Radix UI components
+- **⚡ Fast Performance**: Powered by Next.js with Turbopack for lightning-fast builds
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Node.js (version 18 or higher)
+- npm, yarn, pnpm, or bun
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone <repository-url>
+cd quiz_builder
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+
+3. Start the development server:
 
 ```bash
 npm run dev
@@ -14,23 +52,125 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🏗️ Architecture
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The Quiz Builder follows a modern React architecture with the following key components:
 
-## Learn More
+### Core Technologies
 
-To learn more about Next.js, take a look at the following resources:
+- **Next.js 15.5.2** - Full-stack React framework with App Router
+- **React 19.1.0** - UI library with latest features
+- **TypeScript** - Type-safe development
+- **Tailwind CSS** - Utility-first styling
+- **@dnd-kit/core** - Drag and drop functionality
+- **Zod** - Schema validation
+- **React Hook Form** - Form state management
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### State Management
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **QuizContext**: Manages the global list of quizzes and persistence
+- **ElementContext**: Handles active quiz elements during editing sessions
+- **Local Storage**: Persistent data storage in the browser
 
-## Deploy on Vercel
+### Component Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+QuizBuilder/
+├── LeftSidebar/     # Element selection panel
+├── Canvas/          # Drag & drop quiz canvas
+├── RightSidebar/    # Property editing panel
+└── DragOverlay/     # Visual feedback during drag operations
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📂 Project Structure
+
+```
+├── app/                    # Next.js App Router pages
+│   ├── quiz/              # Quiz viewing and editing routes
+│   ├── hooks/             # Custom React hooks
+│   └── layout.tsx         # Root layout with providers
+├── components/
+│   ├── QuizBuilder/       # Main quiz building interface
+│   ├── fields/            # Form field components
+│   ├── context/           # React Context providers
+│   ├── ui/                # Reusable UI components
+│   └── DataTable/         # Quiz management table
+├── storage/               # Local storage utilities
+├── constants/             # Static data and configurations
+├── utils/                 # Helper functions
+└── lib/                   # Utility libraries
+```
+
+## 🎮 Usage
+
+### Creating a Quiz
+
+1. Navigate to the quiz builder interface
+2. Drag field elements from the left sidebar to the canvas
+3. Configure field properties in the right sidebar
+4. Use the preview button to test your quiz
+5. Publish when ready
+
+### Managing Quizzes
+
+- View all quizzes in the data table on the home page
+- Edit existing quizzes by clicking the edit button
+- Delete quizzes you no longer need
+- Track quiz status (draft/published)
+
+### Available Field Types
+
+- **Text Field**: Single-line text input
+- **Textarea Field**: Multi-line text input
+- **Number Field**: Numeric input with validation
+- **Checkbox Field**: Multiple selection options
+- **Radio Field**: Single selection from multiple options
+- **Select Field**: Dropdown selection
+- **Title Field**: Quiz section headers
+
+## 🛠️ Development
+
+### Available Scripts
+
+- `npm run dev` - Start development server with Turbopack
+- `npm run build` - Build the application for production
+- `npm run start` - Start the production server
+- `npm run lint` - Run ESLint for code quality
+
+### Code Quality
+
+- **ESLint**: Configured with Next.js best practices
+- **TypeScript**: Strict type checking enabled
+- **Prettier**: Code formatting (recommended to configure)
+
+## 🚀 Deployment
+
+### Vercel (Recommended)
+
+The easiest way to deploy your Quiz Builder is using [Vercel](https://vercel.com):
+
+1. Push your code to a Git repository
+2. Connect your repository to Vercel
+3. Deploy automatically on every push
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Built with [Next.js](https://nextjs.org/)
+- UI components from [Radix UI](https://www.radix-ui.com/)
+- Styling with [Tailwind CSS](https://tailwindcss.com/)
+- Drag and drop by [@dnd-kit](https://dndkit.com/)
+- Icons from [Lucide React](https://lucide.dev/)
