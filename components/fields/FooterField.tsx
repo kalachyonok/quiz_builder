@@ -14,7 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { LuHeading1 } from "react-icons/lu";
+import { LuBookDown } from "react-icons/lu";
 import { useElementContext } from "@/app/hooks/useElementContext";
 import {
   ElementsType,
@@ -40,7 +40,7 @@ export const FooterFieldFormElement: QuizElement = {
     extraAttributes,
   }),
   quizBtnElement: {
-    icon: LuHeading1,
+    icon: LuBookDown,
     label: "Footer",
   },
   designerComponent: DesignerComponent,
