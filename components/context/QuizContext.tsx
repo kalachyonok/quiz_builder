@@ -13,6 +13,7 @@ import {
 type QuizContextType = {
   quizzes: Quizzes[];
   addQuiz: (newQuiz: Quizzes) => void;
+  updateQuiz: (id: number, newQuiz: Quizzes) => void;
   removeQuiz: (id: number) => void;
   publishQuiz: (id: number) => void;
 };
@@ -20,6 +21,7 @@ type QuizContextType = {
 export const QuizContext = createContext<QuizContextType>({
   quizzes: [],
   addQuiz: () => {},
+  updateQuiz: () => {},
   removeQuiz: () => {},
   publishQuiz: () => {},
 });
@@ -36,6 +38,14 @@ export const QuizProvider = ({ children }: { children: React.ReactNode }) => {
   const addQuiz = (newQuiz: Quizzes) => {
     setQuizzesState((prev) => {
       const updated = [...prev, newQuiz];
+      upsertQuiz(newQuiz, QUIZZES);
+      return updated;
+    });
+  };
+
+  const updateQuiz = (id: number, newQuiz: Quizzes) => {
+    setQuizzesState((prev) => {
+      const updated = prev.map((q) => (q.id === id ? newQuiz : q));
       upsertQuiz(newQuiz, QUIZZES);
       return updated;
     });
@@ -65,6 +75,7 @@ export const QuizProvider = ({ children }: { children: React.ReactNode }) => {
     <QuizContext.Provider
       value={{
         quizzes,
+        updateQuiz,
         addQuiz,
         removeQuiz,
         publishQuiz,

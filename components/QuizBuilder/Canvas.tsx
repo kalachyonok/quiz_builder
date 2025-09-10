@@ -9,7 +9,7 @@ import {
   QuizElements,
 } from "./QuizElements";
 import { idGenerator } from "@/utils/idGenerator";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { BiSolidTrash } from "react-icons/bi";
 import { CiEdit } from "react-icons/ci";
@@ -19,7 +19,14 @@ export const Canvas = ({
 }: {
   buildElements?: QuizElementInstance[];
 }) => {
-  const { elements, addElements, removeElement } = useElementContext();
+  const { elements, addElements, removeElement, setElements } =
+    useElementContext();
+
+  useEffect(() => {
+    if (elements.length === 0 && buildElements) {
+      setElements(buildElements);
+    }
+  }, [buildElements, elements.length, setElements]);
 
   const droppable = useDroppable({
     id: "drop-area",
@@ -133,9 +140,9 @@ export const Canvas = ({
           <div className="h-32 w-full border border-dashed border-gray-400 rounded-lg"></div>
         </div>
       )}
-      {(buildElements ? buildElements.length > 0 : elements.length > 0) && (
+      {elements.length > 0 && (
         <div className="flex flex-col w-full gap-2 p-4">
-          {(buildElements ?? elements).map((el) => (
+          {elements.map((el) => (
             <DesignerElementWrapper key={el.id} element={el} />
           ))}
         </div>

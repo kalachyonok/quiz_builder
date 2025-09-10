@@ -18,7 +18,7 @@ export const QuizTitle = ({
   viewMode?: boolean;
 }) => {
   const { elements, setElements } = useElementContext();
-  const { addQuiz, publishQuiz, quizzes } = useQuizContext();
+  const { addQuiz, updateQuiz, publishQuiz, quizzes } = useQuizContext();
   const [currentQuizId, setCurrentQuizId] = useState<number | null>(
     quizId || null
   );
@@ -59,7 +59,7 @@ export const QuizTitle = ({
           updatedAt: new Date().toISOString(),
           shape: elements,
         };
-        addQuiz(updatedQuiz);
+        updateQuiz(currentQuizId, updatedQuiz);
         toast.success("Quiz is updated!");
       } else {
         // Create new quiz
