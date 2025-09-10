@@ -19,7 +19,7 @@ export default function HomePage() {
           className="bg-red-700 cursor-pointer mb-8"
           onClick={() => setSelectedElement(null)}
         >
-          <Link href="/quiz/edit">Create new Quiz</Link>
+          <Link href="/quiz/edit/new">Create new Quiz</Link>
         </Button>
         <DataTable columns={columns} data={quizzes} />
       </div>
