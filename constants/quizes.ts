@@ -20,14 +20,7 @@ export const QUIZZES: Quizzes[] = [
     published: true,
     createdAt: "2024-05-12T10:30:00Z",
     updatedAt: "2024-06-01T14:20:00Z",
-    shape: [
-      {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
+    shape: [      
       {
         id: "2455",
         type: "TextField",
@@ -37,39 +30,7 @@ export const QUIZZES: Quizzes[] = [
           placeHolder: "Value here...",
           required: false,
         },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
-        },
-      },
+      },      
     ],
   },
   {
@@ -82,13 +43,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2023-09-02T11:40:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -96,38 +50,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -142,13 +64,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2024-02-18T08:45:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -156,38 +71,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -202,13 +85,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2023-08-02T16:55:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -216,38 +92,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -262,13 +106,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2023-01-10T09:10:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -276,38 +113,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -322,13 +127,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2024-04-12T19:05:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -336,38 +134,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -382,13 +148,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2023-06-01T21:30:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -396,38 +155,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -442,13 +169,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2023-03-12T12:15:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -456,38 +176,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -502,13 +190,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2024-05-14T17:45:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -516,38 +197,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -562,13 +211,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2023-10-04T16:00:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -576,38 +218,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -622,13 +232,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2023-01-12T08:20:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -636,38 +239,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -682,13 +253,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2024-03-18T09:25:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -696,38 +260,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -742,13 +274,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2023-04-22T18:40:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -756,38 +281,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -802,13 +295,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2024-01-09T13:15:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -816,38 +302,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -862,13 +316,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2024-06-10T11:35:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -876,38 +323,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -922,13 +337,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2023-02-23T10:20:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -936,38 +344,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -982,13 +358,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2022-11-17T08:50:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -996,38 +365,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -1042,13 +379,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2023-07-09T19:10:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -1056,38 +386,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -1102,13 +400,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2024-04-20T22:15:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -1116,38 +407,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
@@ -1162,13 +421,6 @@ export const QUIZZES: Quizzes[] = [
     updatedAt: "2023-05-19T15:30:00Z",
     shape: [
       {
-        id: "779",
-        type: "TitleField",
-        extraAttributes: {
-          title: "Let's start quiz",
-        },
-      },
-      {
         id: "2455",
         type: "TextField",
         extraAttributes: {
@@ -1176,38 +428,6 @@ export const QUIZZES: Quizzes[] = [
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
-        },
-      },
-      {
-        id: "2799",
-        type: "NumberField",
-        extraAttributes: {
-          label: "Second Question - What is your age?",
-          helperText: "Helper text",
-          placeHolder: "0",
-          required: false,
-        },
-      },
-      {
-        id: "7026",
-        type: "SelectField",
-        extraAttributes: {
-          label: "Select correct answers",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          options: ["PI", "PI-PI", "PI-PI-PI"],
-        },
-      },
-      {
-        id: "1281",
-        type: "TextAreaField",
-        extraAttributes: {
-          label: "Type your vision on ...",
-          helperText: "Helper text",
-          placeHolder: "Value here...",
-          required: false,
-          rows: 3,
         },
       },
     ],
