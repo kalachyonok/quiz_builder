@@ -71,7 +71,6 @@ export function seedQuizzesIfNeeded(seed: Quizzes[]): void {
 export function upsertQuiz(newQuiz: Quizzes, seedQuizzes: Quizzes[]): void {
   let quizzes = getQuizzes();
 
-  // If localStorage is empty or corrupted, restore seed quizzes
   if (quizzes.length === 0) {
     quizzes = [...seedQuizzes];
   }
@@ -85,7 +84,6 @@ export function upsertQuiz(newQuiz: Quizzes, seedQuizzes: Quizzes[]): void {
 export function publishQuizById(id: number, seedQuizzes: Quizzes[]): void {
   let quizzes = getQuizzes();
 
-  // If localStorage is empty or corrupted, restore seed quizzes
   if (quizzes.length === 0) {
     quizzes = [...seedQuizzes];
   }
@@ -100,11 +98,10 @@ export function publishQuizById(id: number, seedQuizzes: Quizzes[]): void {
 export function removeQuizById(id: number, seedQuizzes: Quizzes[]): void {
   let quizzes = getQuizzes();
 
-  // If localStorage is empty or corrupted, restore seed quizzes
   if (quizzes.length === 0) {
     quizzes = [...seedQuizzes];
   }
 
-  quizzes = quizzes.filter((q) => q.id !== id);
-  setQuizzes(quizzes);
+  const updatedQuizzes = quizzes.filter((q) => q.id !== id);
+  setQuizzes(updatedQuizzes);
 }

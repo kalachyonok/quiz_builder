@@ -1,7 +1,6 @@
 "use client";
 
 import { Container } from "@/components/container";
-import { columns } from "@/components/DataTable/column";
 import { DataTable } from "@/components/DataTable/DataTable";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -21,7 +20,7 @@ export default function HomePage() {
         >
           <Link href="/quiz/edit/new">Create new Quiz</Link>
         </Button>
-        <DataTable columns={columns} data={quizzes} />
+        <DataTable data={quizzes} />
       </div>
     </Container>
   );
