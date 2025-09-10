@@ -1,20 +1,9 @@
 import { IconType } from "react-icons";
 import { TextQuizFormElement } from "../fields/TextField";
-import { TitleFieldFormElement } from "../fields/TitleField";
-import { NumberFieldFormElement } from "../fields/NumberField";
-import { SelectFieldFormElement } from "../fields/SelectField";
 import { CheckboxFieldFormElement } from "../fields/CheckboxField";
-import { TextAreaFormElement } from "../fields/TextAreaField";
 import { RadioFieldFormElement } from "../fields/RadioField";
 
-export type ElementsType =
-  | "TextField"
-  | "TitleField"
-  | "NumberField"
-  | "SelectField"
-  | "CheckboxField"
-  | "TextAreaField"
-  | "RadioField";
+export type ElementsType = "TextField" | "CheckboxField" | "RadioField";
 
 export type SubmitFunction = (key: string, value: string) => void;
 
@@ -50,10 +39,6 @@ type QuizElementsType = {
 };
 export const QuizElements: QuizElementsType = {
   TextField: TextQuizFormElement,
-  TitleField: TitleFieldFormElement,
-  NumberField: NumberFieldFormElement,
-  SelectField: SelectFieldFormElement,
   CheckboxField: CheckboxFieldFormElement,
-  TextAreaField: TextAreaFormElement,
   RadioField: RadioFieldFormElement,
 };
