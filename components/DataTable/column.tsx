@@ -12,6 +12,7 @@ import {
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { Quizzes } from "@/constants/quizes";
+import { useQuizContext } from "@/app/hooks/useQuizContext";
 
 export const columns: ColumnDef<Quizzes>[] = [
   {
@@ -66,25 +67,43 @@ export const columns: ColumnDef<Quizzes>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              ...
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem asChild className="cursor-pointer">
-              <Link href={`/quiz/${row.original.id}`}>View</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild className="cursor-pointer">
-              <Link href={`/quiz/edit/${row.original.id}`}>Edit</Link>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
+      const ActionsCell = () => {
+        const { removeQuiz } = useQuizContext();
+
+        const handleDelete = () => {
+          removeQuiz(row.original.id);
+        };
+
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                ...
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild className="cursor-pointer">
+                <Link href={`/quiz/${row.original.id}`}>View</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="cursor-pointer">
+                <Link href={`/quiz/edit/${row.original.id}`}>Edit</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="cursor-pointer">
+                <span
+                  className="text-red-600 hover:text-red-800"
+                  onClick={handleDelete}
+                >
+                  Delete
+                </span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        );
+      };
+
+      return <ActionsCell />;
     },
   },
 ];
