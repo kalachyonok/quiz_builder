@@ -20,7 +20,7 @@ function PreviewBtn() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={"outline"} className="gap-2">
+        <Button variant="outline" className="gap-2">
           <MdPreview className="h-6 w-6" />
           Preview
         </Button>

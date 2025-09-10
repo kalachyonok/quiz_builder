@@ -76,10 +76,10 @@ export const columns: ColumnDef<Quizzes>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild>
+            <DropdownMenuItem asChild className="cursor-pointer">
               <Link href={`/quiz/${row.original.id}`}>View</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem asChild>
+            <DropdownMenuItem asChild className="cursor-pointer">
               <Link href={`/quiz/edit/${row.original.id}`}>Edit</Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
