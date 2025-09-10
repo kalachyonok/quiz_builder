@@ -18,14 +18,10 @@ export const ElementContext = createContext<ElementContextType | null>(null);
 
 export const ElementProvider = ({
   children,
-  initialElements,
 }: {
   children: React.ReactNode;
-  initialElements?: QuizElementInstance[];
 }) => {
-  const [elements, setElements] = useState<QuizElementInstance[]>(
-    initialElements || []
-  );
+  const [elements, setElements] = useState<QuizElementInstance[]>([]);
   const [selectedElement, setSelectedElement] =
     useState<QuizElementInstance | null>(null);
 
