@@ -28,12 +28,13 @@ export const QuizTitle = ({
   const [title, setTitle] = useState<string>(existingQuiz?.title || "");
 
   useEffect(() => {
-    if (quizId && existingQuiz && !isPublished) {
+    if (quizId && existingQuiz) {
       setTitle(existingQuiz.title);
       setCurrentQuizId(quizId);
       setElements(existingQuiz.shape);
+      setIsPublished(existingQuiz.published);
     }
-  }, [quizId, existingQuiz, setElements, isPublished]);
+  }, [quizId, existingQuiz, setElements]);
 
   // Reset state when switching between new quiz creation and editing
   useEffect(() => {
@@ -85,13 +86,26 @@ export const QuizTitle = ({
       toast.error("No quiz to publish");
       return;
     }
-    publishQuiz(currentQuizId);
-    setIsPublished(true);
 
-    setElements([]);
-    setCurrentQuizId(null);
-    setTitle("");
-    toast.success("Quiz is published!");
+    if (isPublished || existingQuiz?.published) {
+      // Unpublish the quiz
+      const updatedQuiz = {
+        ...existingQuiz!,
+        id: currentQuizId,
+        title: title,
+        published: false,
+        updatedAt: new Date().toISOString(),
+        shape: elements,
+      };
+      updateQuiz(currentQuizId, updatedQuiz);
+      setIsPublished(false);
+      toast.success("Quiz is unpublished!");
+    } else {
+      // Publish the quiz
+      publishQuiz(currentQuizId);
+      setIsPublished(true);
+      toast.success("Quiz is published!");
+    }
   };
 
   if (viewMode) {
@@ -128,11 +142,19 @@ export const QuizTitle = ({
           Save
         </Button>
         <Button
-          className="bg-amber-600"
-          disabled={elements.length === 0 && title.trim().length === 0}
+          className={
+            isPublished || existingQuiz?.published ? "" : "bg-amber-600"
+          }
+          variant={
+            isPublished || existingQuiz?.published ? "destructive" : "default"
+          }
+          disabled={
+            !currentQuizId ||
+            (elements.length === 0 && title.trim().length === 0)
+          }
           onClick={onPublishHandler}
         >
-          Publish
+          {isPublished || existingQuiz?.published ? "Unpublish" : "Publish"}
         </Button>
       </div>
     </div>
