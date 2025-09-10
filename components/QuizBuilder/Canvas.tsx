@@ -1,6 +1,6 @@
 "use client";
 
-import { useElementContext } from "@/app/hooks/useElementContext";
+import { useElementContext } from "@/hooks/useElementContext";
 import { cn } from "@/lib/utils";
 import { useDndMonitor, useDraggable, useDroppable } from "@dnd-kit/core";
 import {

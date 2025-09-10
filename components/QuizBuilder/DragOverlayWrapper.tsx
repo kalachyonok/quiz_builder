@@ -4,7 +4,7 @@ import { Active, DragOverlay, useDndMonitor } from "@dnd-kit/core";
 import { useState } from "react";
 import { SidebarBtnElementDragOverlay } from "./SidebarBtnElement";
 import { ElementsType, QuizElements } from "./QuizElements";
-import { useElementContext } from "@/app/hooks/useElementContext";
+import { useElementContext } from "@/hooks/useElementContext";
 
 export const DragOverlayWrapper = () => {
   const { elements } = useElementContext();

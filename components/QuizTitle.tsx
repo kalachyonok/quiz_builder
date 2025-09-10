@@ -5,9 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Form from "next/form";
 import PreviewBtn from "./QuizBuilder/PreviewBtn";
-import { useElementContext } from "@/app/hooks/useElementContext";
+import { useElementContext } from "@/hooks/useElementContext";
 import { useState, useEffect } from "react";
-import { useQuizContext } from "@/app/hooks/useQuizContext";
+import { useQuizContext } from "@/hooks/useQuizContext";
 import { toast } from "sonner";
 
 export const QuizTitle = ({

@@ -2,7 +2,7 @@
 import React from "react";
 
 import { MdPreview } from "react-icons/md";
-import { useElementContext } from "@/app/hooks/useElementContext";
+import { useElementContext } from "@/hooks/useElementContext";
 import {
   Dialog,
   DialogContent,

@@ -1,5 +1,5 @@
 "use client";
-import { useElementContext } from "@/app/hooks/useElementContext";
+import { useElementContext } from "@/hooks/useElementContext";
 import { QuizElements } from "./QuizElements";
 
 export const RightSidebar = () => {

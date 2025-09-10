@@ -4,7 +4,7 @@ import { Container } from "@/components/container";
 import { QuizElements } from "@/components/QuizBuilder/QuizElements";
 import { useParams } from "next/navigation";
 import { Header } from "@/components/header";
-import { useQuizContext } from "@/app/hooks/useQuizContext";
+import { useQuizContext } from "@/hooks/useQuizContext";
 
 export default function QuizPage() {
   const { id } = useParams();

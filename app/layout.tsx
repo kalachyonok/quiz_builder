@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../globals.css";
 import { ElementProvider } from "@/components/context/ElementContext";
 import { QuizProvider } from "@/components/context/QuizContext";
 

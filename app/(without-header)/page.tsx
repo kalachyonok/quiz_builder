@@ -5,8 +5,8 @@ import { columns } from "@/components/DataTable/column";
 import { DataTable } from "@/components/DataTable/DataTable";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useQuizContext } from "../hooks/useQuizContext";
-import { useElementContext } from "../hooks/useElementContext";
+import { useQuizContext } from "../../hooks/useQuizContext";
+import { useElementContext } from "../../hooks/useElementContext";
 
 export default function HomePage() {
   const { quizzes } = useQuizContext();

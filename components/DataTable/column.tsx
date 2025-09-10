@@ -11,7 +11,7 @@ import {
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { Quizzes } from "@/constants/quizzes";
-import { useQuizContext } from "@/app/hooks/useQuizContext";
+import { useQuizContext } from "@/hooks/useQuizContext";
 
 export const columns: ColumnDef<Quizzes>[] = [
   {

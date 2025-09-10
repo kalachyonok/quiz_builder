@@ -2,7 +2,7 @@
 import { Container } from "@/components/container";
 import { QuizBuilder } from "@/components/QuizBuilder/QuizBuilder";
 import { useParams } from "next/navigation";
-import { useQuizContext } from "@/app/hooks/useQuizContext";
+import { useQuizContext } from "@/hooks/useQuizContext";
 import { Header } from "@/components/header";
 
 export default function IndividualQuizPage() {
