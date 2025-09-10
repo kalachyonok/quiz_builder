@@ -9,6 +9,7 @@ import { useElementContext } from "@/hooks/useElementContext";
 import { useState, useEffect } from "react";
 import { useQuizContext } from "@/hooks/useQuizContext";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export const QuizTitle = ({
   quizId,
@@ -23,6 +24,7 @@ export const QuizTitle = ({
     quizId || null
   );
   const [isPublished, setIsPublished] = useState<boolean>(false);
+  const router = useRouter();
 
   const existingQuiz = quizId ? quizzes.find((q) => q.id === quizId) : null;
   const [title, setTitle] = useState<string>(existingQuiz?.title || "");
@@ -105,6 +107,7 @@ export const QuizTitle = ({
       publishQuiz(currentQuizId);
       setIsPublished(true);
       toast.success("Quiz is published!");
+      router.push("/");
     }
   };
 

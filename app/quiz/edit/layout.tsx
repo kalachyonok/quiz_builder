@@ -1,5 +1,4 @@
 import { Header } from "@/components/header";
-import { Toaster } from "sonner";
 
 export default function BuilderLayout({
   children,
@@ -8,7 +7,6 @@ export default function BuilderLayout({
 }>) {
   return (
     <div>
-      <Toaster position="top-center" richColors />
       <Header />
       {children}
     </div>
