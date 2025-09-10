@@ -26,7 +26,8 @@ export const Canvas = ({
     if (elements.length === 0 && buildElements) {
       setElements(buildElements);
     }
-  }, [buildElements, elements.length, setElements]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- need call just once
+  }, []);
 
   const droppable = useDroppable({
     id: "drop-area",
