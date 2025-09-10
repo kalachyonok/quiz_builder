@@ -4,13 +4,15 @@ import { CheckboxFieldFormElement } from "../fields/CheckboxField";
 import { RadioFieldFormElement } from "../fields/RadioField";
 import { HeadingFieldFormElement } from "../fields/HeadingField";
 import { FooterFieldFormElement } from "../fields/FooterField";
+import { ButtonFieldFormElement } from "../fields/ButtonField";
 
 export type ElementsType =
   | "TextField"
   | "CheckboxField"
   | "RadioField"
   | "HeadingField"
-  | "FooterField";
+  | "FooterField"
+  | "ButtonField";
 
 export type SubmitFunction = (key: string, value: string) => void;
 
@@ -50,4 +52,5 @@ export const QuizElements: QuizElementsType = {
   RadioField: RadioFieldFormElement,
   HeadingField: HeadingFieldFormElement,
   FooterField: FooterFieldFormElement,
+  ButtonField: ButtonFieldFormElement,
 };

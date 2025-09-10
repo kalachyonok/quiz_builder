@@ -9,6 +9,7 @@ export const LeftSidebar = () => {
       <SidebarBtnElement quizElement={QuizElements.RadioField} />
       <SidebarBtnElement quizElement={QuizElements.CheckboxField} />
       <SidebarBtnElement quizElement={QuizElements.TextField} />
+      <SidebarBtnElement quizElement={QuizElements.ButtonField} />
       <SidebarBtnElement quizElement={QuizElements.FooterField} />
     </aside>
   );
