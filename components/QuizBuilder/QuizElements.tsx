@@ -2,8 +2,13 @@ import { IconType } from "react-icons";
 import { TextQuizFormElement } from "../fields/TextField";
 import { CheckboxFieldFormElement } from "../fields/CheckboxField";
 import { RadioFieldFormElement } from "../fields/RadioField";
+import { HeadingFieldFormElement } from "../fields/HeadingField";
 
-export type ElementsType = "TextField" | "CheckboxField" | "RadioField";
+export type ElementsType =
+  | "TextField"
+  | "CheckboxField"
+  | "RadioField"
+  | "HeadingField";
 
 export type SubmitFunction = (key: string, value: string) => void;
 
@@ -41,4 +46,5 @@ export const QuizElements: QuizElementsType = {
   TextField: TextQuizFormElement,
   CheckboxField: CheckboxFieldFormElement,
   RadioField: RadioFieldFormElement,
+  HeadingField: HeadingFieldFormElement,
 };
