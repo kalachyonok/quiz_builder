@@ -3,7 +3,6 @@ import { QuizElementInstance } from "@/components/QuizBuilder/QuizElements";
 export type Quizzes = {
   id: number;
   title: string;
-  tags: string[];
   saved: boolean;
   published: boolean;
   createdAt: string;
@@ -15,7 +14,6 @@ export const QUIZZES: Quizzes[] = [
   {
     id: 1234,
     title: "General Knowledge Quiz",
-    tags: ["knowledge", "general", "trivia"],
     saved: true,
     published: true,
     createdAt: "2024-05-12T10:30:00Z",
@@ -36,7 +34,6 @@ export const QUIZZES: Quizzes[] = [
   {
     id: 2345,
     title: "Science & Nature Challenge",
-    tags: ["science", "nature", "biology"],
     saved: true,
     published: false,
     createdAt: "2023-08-21T09:15:00Z",
@@ -57,7 +54,6 @@ export const QUIZZES: Quizzes[] = [
   {
     id: 3456,
     title: "History Facts Test",
-    tags: ["history", "world", "events"],
     saved: true,
     published: true,
     createdAt: "2024-01-05T12:00:00Z",
@@ -78,7 +74,6 @@ export const QUIZZES: Quizzes[] = [
   {
     id: 4567,
     title: "Pop Culture Trivia",
-    tags: ["movies", "music", "celebs"],
     saved: true,
     published: true,
     createdAt: "2023-07-11T15:25:00Z",
@@ -99,7 +94,6 @@ export const QUIZZES: Quizzes[] = [
   {
     id: 5678,
     title: "Geography Master Quiz",
-    tags: ["geography", "maps", "countries"],
     saved: true,
     published: false,
     createdAt: "2022-12-19T18:40:00Z",
@@ -120,7 +114,6 @@ export const QUIZZES: Quizzes[] = [
   {
     id: 6789,
     title: "Sports Challenge",
-    tags: ["sports", "football", "basketball"],
     saved: true,
     published: true,
     createdAt: "2024-03-03T07:50:00Z",
@@ -141,7 +134,6 @@ export const QUIZZES: Quizzes[] = [
   {
     id: 7890,
     title: "Mathematics Quiz",
-    tags: ["math", "logic", "numbers"],
     saved: true,
     published: false,
     createdAt: "2023-05-15T13:20:00Z",
@@ -162,7 +154,6 @@ export const QUIZZES: Quizzes[] = [
   {
     id: 8901,
     title: "Technology & Gadgets",
-    tags: ["technology", "gadgets", "IT"],
     saved: true,
     published: true,
     createdAt: "2023-02-08T10:05:00Z",

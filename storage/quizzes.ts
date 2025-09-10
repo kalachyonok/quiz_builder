@@ -1,6 +1,6 @@
 "use client";
 
-import { Quizzes } from "@/constants/quizes";
+import { Quizzes } from "@/constants/quizzes";
 import { toast } from "sonner";
 
 const STORAGE_KEY = "quizbuilder.quizzes";

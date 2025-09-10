@@ -1,6 +1,5 @@
 import { transformDateFromISO } from "@/utils/transformDate";
 import { ColumnDef } from "@tanstack/react-table";
-import { Badge } from "../ui/badge";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +10,7 @@ import {
 } from "../ui/dropdown-menu";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { Quizzes } from "@/constants/quizes";
+import { Quizzes } from "@/constants/quizzes";
 import { useQuizContext } from "@/app/hooks/useQuizContext";
 
 export const columns: ColumnDef<Quizzes>[] = [
@@ -27,22 +26,6 @@ export const columns: ColumnDef<Quizzes>[] = [
       const formatted = isPublished ? "✔️" : "❌";
 
       return <div className="text-center">{formatted}</div>;
-    },
-  },
-  {
-    accessorKey: "tags",
-    header: () => <div className="text-center">Tags</div>,
-    cell: ({ row }) => {
-      const tags = row.getValue("tags") as string[];
-      const formattedTags = tags.map((tag) => {
-        return (
-          <Badge variant="default" key={tag} className="m-0.5 bg-blue-600">
-            {tag}
-          </Badge>
-        );
-      });
-
-      return <div className="text-center gap-1">{formattedTags}</div>;
     },
   },
   {

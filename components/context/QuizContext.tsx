@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useEffect, useState } from "react";
-import { Quizzes, QUIZZES } from "@/constants/quizes";
+import { Quizzes, QUIZZES } from "@/constants/quizzes";
 import {
   getQuizzes,
   publishQuizById,

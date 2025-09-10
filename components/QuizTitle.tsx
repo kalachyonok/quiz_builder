@@ -67,7 +67,6 @@ export const QuizTitle = ({
         const newQuiz = {
           id: currentId,
           title: title,
-          tags: ["-"],
           saved: true,
           published: false,
           createdAt: new Date().toISOString(),
