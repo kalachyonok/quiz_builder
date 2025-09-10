@@ -24,7 +24,9 @@ export default function QuizPage() {
           {quiz?.published &&
             quiz.shape.map((element) => {
               const QuizComponent = QuizElements[element.type].quizComponent;
-              return <QuizComponent key={quiz.id} elementInstance={element} />;
+              return (
+                <QuizComponent key={element.id} elementInstance={element} />
+              );
             })}
         </div>
       </div>
