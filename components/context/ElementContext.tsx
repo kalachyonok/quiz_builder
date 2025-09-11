@@ -1,6 +1,13 @@
 "use client";
 
-import { createContext, Dispatch, SetStateAction, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
 import { QuizElementInstance } from "../QuizBuilder/QuizElements";
 
 type ElementContextType = {
@@ -9,7 +16,6 @@ type ElementContextType = {
   addElements: (index: number, element: QuizElementInstance) => void;
   removeElement: (id: string) => void;
   selectedElement: QuizElementInstance | null;
-
   setSelectedElement: Dispatch<SetStateAction<QuizElementInstance | null>>;
   updateElement: (id: string, element: QuizElementInstance) => void;
 };
@@ -25,41 +31,50 @@ export const ElementProvider = ({
   const [selectedElement, setSelectedElement] =
     useState<QuizElementInstance | null>(null);
 
-  const addElements = (index: number, element: QuizElementInstance) => {
-    setElements((prevElements) => {
-      const newElements = [...prevElements];
-      newElements.splice(index, 0, element);
-      return newElements;
-    });
-  };
+  const addElements = useCallback(
+    (index: number, element: QuizElementInstance) => {
+      setElements((prevElements) => {
+        const newElements = [...prevElements];
+        newElements.splice(index, 0, element);
+        return newElements;
+      });
+    },
+    []
+  );
 
-  const removeElement = (id: string) => {
+  const removeElement = useCallback((id: string) => {
     setElements((prevElements) =>
       prevElements.filter((element) => element.id !== id)
     );
-  };
+  }, []);
 
-  const updateElement = (id: string, element: QuizElementInstance) => {
-    setElements((prev) => {
-      const newElements = [...prev];
-      const index = newElements.findIndex((el) => el.id === id);
-      newElements[index] = element;
-      return newElements;
-    });
-  };
+  const updateElement = useCallback(
+    (id: string, element: QuizElementInstance) => {
+      setElements((prev) => {
+        const newElements = [...prev];
+        const index = newElements.findIndex((el) => el.id === id);
+        newElements[index] = element;
+        return newElements;
+      });
+    },
+    []
+  );
+
+  const contextValue = useMemo(
+    () => ({
+      elements,
+      setElements,
+      addElements,
+      removeElement,
+      selectedElement,
+      setSelectedElement,
+      updateElement,
+    }),
+    [elements, selectedElement, addElements, removeElement, updateElement]
+  );
 
   return (
-    <ElementContext.Provider
-      value={{
-        elements,
-        setElements,
-        addElements,
-        removeElement,
-        selectedElement,
-        setSelectedElement,
-        updateElement,
-      }}
-    >
+    <ElementContext.Provider value={contextValue}>
       {children}
     </ElementContext.Provider>
   );
