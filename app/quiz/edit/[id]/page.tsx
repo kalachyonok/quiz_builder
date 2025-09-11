@@ -1,4 +1,5 @@
 "use client";
+
 import { Container } from "@/components/Container";
 import { QuizBuilder } from "@/components/QuizBuilder/QuizBuilder";
 import { useParams } from "next/navigation";
