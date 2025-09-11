@@ -12,163 +12,111 @@ export type Quizzes = {
 
 export const QUIZZES: Quizzes[] = [
   {
-    id: 1234,
-    title: "General Knowledge Quiz",
-    saved: true,
-    published: true,
-    createdAt: "2024-05-12T10:30:00Z",
-    updatedAt: "2024-06-01T14:20:00Z",
-    shape: [      
-      {
-        id: "2455",
-        type: "TextField",
-        extraAttributes: {
-          label: "First Question - What your name?",
-          helperText: "Input the text above",
-          placeHolder: "Value here...",
-          required: false,
-        },
-      },      
-    ],
-  },
-  {
-    id: 2345,
-    title: "Science & Nature Challenge",
+    id: 1757576238218,
+    title: "Car Brands Quiz",
     saved: true,
     published: false,
-    createdAt: "2023-08-21T09:15:00Z",
-    updatedAt: "2023-09-02T11:40:00Z",
+    createdAt: "2025-09-11T07:37:18.218Z",
+    updatedAt: "2025-09-11T07:37:18.219Z",
     shape: [
       {
-        id: "2455",
+        id: "5981",
+        type: "RadioField",
+        extraAttributes: {
+          label: "Which car brand has a logo with four rings?",
+          helperText: "",
+          required: false,
+          options: ["BMW", "Audi", "Toyota"],
+        },
+      },
+      {
+        id: "133",
+        type: "CheckboxField",
+        extraAttributes: {
+          label: "Which of the following are Japanese car brands?",
+          helperText: "",
+          required: false,
+          options: ["Toyota", "Ford", "Honda"],
+        },
+      },
+      {
+        id: "7101",
         type: "TextField",
         extraAttributes: {
-          label: "First Question - What your name?",
+          label:
+            "Write the name of a car brand that starts with the letter “B”.",
           helperText: "Input the text above",
           placeHolder: "Value here...",
           required: false,
         },
       },
+      {
+        id: "9575",
+        type: "ButtonField",
+        extraAttributes: {
+          text: "Submit",
+          variant: "submit",
+        },
+      },
+      {
+        id: "4306",
+        type: "FooterField",
+        extraAttributes: {
+          title: "© 2025 Quiz Builder. All rights reserved.",
+        },
+      },
     ],
   },
   {
-    id: 3456,
-    title: "History Facts Test",
+    id: 1757576577426,
+    title: "Famous Cars Quiz",
     saved: true,
     published: true,
-    createdAt: "2024-01-05T12:00:00Z",
-    updatedAt: "2024-02-18T08:45:00Z",
+    createdAt: "2025-09-11T07:42:57.426Z",
+    updatedAt: "2025-09-11T07:43:00.911Z",
     shape: [
       {
-        id: "2455",
-        type: "TextField",
+        id: "5701",
+        type: "HeadingField",
         extraAttributes: {
-          label: "First Question - What your name?",
-          helperText: "Input the text above",
-          placeHolder: "Value here...",
+          title: "Let's start quiz!!!",
+        },
+      },
+      {
+        id: "6374",
+        type: "RadioField",
+        extraAttributes: {
+          label: "Which car brand produces the Mustang?",
+          helperText: "",
           required: false,
+          options: ["Ford", "Chevrolet", "Dodge"],
+        },
+      },
+      {
+        id: "4035",
+        type: "CheckboxField",
+        extraAttributes: {
+          label: "Which of the following are luxury car brands?",
+          helperText: "",
+          required: false,
+          options: ["Lexus", "Lamborghini", "Hyundai"],
+        },
+      },
+      {
+        id: "6459",
+        type: "ButtonField",
+        extraAttributes: {
+          text: "Next",
+          variant: "next",
+        },
+      },
+      {
+        id: "7277",
+        type: "FooterField",
+        extraAttributes: {
+          title: "© 2025 Quiz Builder. All rights reserved.",
         },
       },
     ],
   },
-  {
-    id: 4567,
-    title: "Pop Culture Trivia",
-    saved: true,
-    published: true,
-    createdAt: "2023-07-11T15:25:00Z",
-    updatedAt: "2023-08-02T16:55:00Z",
-    shape: [
-      {
-        id: "2455",
-        type: "TextField",
-        extraAttributes: {
-          label: "First Question - What your name?",
-          helperText: "Input the text above",
-          placeHolder: "Value here...",
-          required: false,
-        },
-      },
-    ],
-  },
-  {
-    id: 5678,
-    title: "Geography Master Quiz",
-    saved: true,
-    published: false,
-    createdAt: "2022-12-19T18:40:00Z",
-    updatedAt: "2023-01-10T09:10:00Z",
-    shape: [
-      {
-        id: "2455",
-        type: "TextField",
-        extraAttributes: {
-          label: "First Question - What your name?",
-          helperText: "Input the text above",
-          placeHolder: "Value here...",
-          required: false,
-        },
-      },
-    ],
-  },
-  {
-    id: 6789,
-    title: "Sports Challenge",
-    saved: true,
-    published: true,
-    createdAt: "2024-03-03T07:50:00Z",
-    updatedAt: "2024-04-12T19:05:00Z",
-    shape: [
-      {
-        id: "2455",
-        type: "TextField",
-        extraAttributes: {
-          label: "First Question - What your name?",
-          helperText: "Input the text above",
-          placeHolder: "Value here...",
-          required: false,
-        },
-      },
-    ],
-  },
-  {
-    id: 7890,
-    title: "Mathematics Quiz",
-    saved: true,
-    published: false,
-    createdAt: "2023-05-15T13:20:00Z",
-    updatedAt: "2023-06-01T21:30:00Z",
-    shape: [
-      {
-        id: "2455",
-        type: "TextField",
-        extraAttributes: {
-          label: "First Question - What your name?",
-          helperText: "Input the text above",
-          placeHolder: "Value here...",
-          required: false,
-        },
-      },
-    ],
-  },
-  {
-    id: 8901,
-    title: "Technology & Gadgets",
-    saved: true,
-    published: true,
-    createdAt: "2023-02-08T10:05:00Z",
-    updatedAt: "2023-03-12T12:15:00Z",
-    shape: [
-      {
-        id: "2455",
-        type: "TextField",
-        extraAttributes: {
-          label: "First Question - What your name?",
-          helperText: "Input the text above",
-          placeHolder: "Value here...",
-          required: false,
-        },
-      },
-    ],
-  }, 
 ];
