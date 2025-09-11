@@ -30,6 +30,7 @@ import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { AiOutlinePlus, AiOutlineClose } from "react-icons/ai";
 import { cn } from "@/lib/utils";
+import { handleEnterKeyDown } from "@/utils/enterKeyDown";
 
 const type: ElementsType = "CheckboxField";
 
@@ -237,12 +238,7 @@ function PropertiesComponent({
             <FormItem>
               <FormLabel>Label</FormLabel>
               <FormControl>
-                <Input
-                  {...field}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") e.currentTarget.blur();
-                  }}
-                />
+                <Input {...field} onKeyDown={handleEnterKeyDown} />
               </FormControl>
               <FormDescription>
                 The label of the field. <br /> It will be displayed above the
@@ -259,12 +255,7 @@ function PropertiesComponent({
             <FormItem>
               <FormLabel>Helper text</FormLabel>
               <FormControl>
-                <Input
-                  {...field}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") e.currentTarget.blur();
-                  }}
-                />
+                <Input {...field} onKeyDown={handleEnterKeyDown} />
               </FormControl>
               <FormDescription>
                 The helper text of the field. <br />

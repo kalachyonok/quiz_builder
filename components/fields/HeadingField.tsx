@@ -21,6 +21,7 @@ import {
   QuizElement,
   QuizElementInstance,
 } from "../QuizBuilder/QuizElements";
+import { handleEnterKeyDown } from "@/utils/enterKeyDown";
 
 const type: ElementsType = "HeadingField";
 
@@ -127,12 +128,7 @@ function PropertiesComponent({
             <FormItem>
               <FormLabel>Title</FormLabel>
               <FormControl>
-                <Input
-                  {...field}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") e.currentTarget.blur();
-                  }}
-                />
+                <Input {...field} onKeyDown={handleEnterKeyDown} />
               </FormControl>
               <FormMessage />
             </FormItem>
