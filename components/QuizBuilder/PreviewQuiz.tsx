@@ -11,10 +11,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import { QuizElements } from "../QuizBuilder/QuizElements";
+import { QuizElements } from "./QuizElements";
 import { Button } from "../ui/button";
 
-function PreviewBtn() {
+function PreviewQuiz() {
   const { elements } = useElementContext();
 
   return (
@@ -49,4 +49,4 @@ function PreviewBtn() {
   );
 }
 
-export default PreviewBtn;
+export default PreviewQuiz;

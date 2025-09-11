@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Form from "next/form";
-import PreviewBtn from "./QuizBuilder/PreviewBtn";
+import PreviewQuiz from "./QuizBuilder/PreviewQuiz";
 import { useElementContext } from "@/hooks/useElementContext";
 import { useState, useEffect } from "react";
 import { useQuizContext } from "@/hooks/useQuizContext";
@@ -140,7 +140,7 @@ export const QuizTitle = ({
       </Form>
 
       <div className="flex gap-2">
-        <PreviewBtn />
+        <PreviewQuiz />
         <Button className="bg-emerald-600" onClick={onSaveHandler}>
           Save
         </Button>
