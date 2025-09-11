@@ -24,7 +24,6 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { Switch } from "../ui/switch";
 import { Checkbox } from "../ui/checkbox";
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
@@ -37,14 +36,12 @@ const type: ElementsType = "CheckboxField";
 const extraAttributes = {
   label: "Checkbox field",
   helperText: "Helper text",
-  required: false,
   options: ["Option 1", "Option 2"],
 };
 
 const propertiesSchema = z.object({
   label: z.string().min(2).max(50),
   helperText: z.string().max(200),
-  required: z.boolean().default(false).optional(),
   options: z.array(z.string().min(1)).default([]).optional(),
 });
 
@@ -62,15 +59,7 @@ export const CheckboxFieldFormElement: QuizElement = {
   designerComponent: DesignerComponent,
   quizComponent: FormComponent,
   propertiesComponent: PropertiesComponent,
-
-  validate: (
-    formElement: QuizElementInstance,
-    currentValue: string
-  ): boolean => {
-    const element = formElement as CustomInstance;
-    if (!element.extraAttributes.required) return true;
-    return currentValue.trim().length > 0;
-  },
+  validate: () => true,
 };
 
 type CustomInstance = QuizElementInstance & {
@@ -83,13 +72,10 @@ function DesignerComponent({
   elementInstance: QuizElementInstance;
 }) {
   const element = elementInstance as CustomInstance;
-  const { label, required, helperText, options } = element.extraAttributes;
+  const { label, helperText, options } = element.extraAttributes;
   return (
     <div className="flex flex-col gap-2 w-full">
-      <Label>
-        {label}
-        {required && "*"}
-      </Label>
+      <Label>{label}</Label>
       <div className="flex flex-col gap-2">
         {options.map((opt) => {
           const id = `${element.id}-${opt}`;
@@ -135,7 +121,7 @@ function FormComponent({
     setError(isInvalid === true);
   }, [isInvalid]);
 
-  const { label, required, helperText, options } = element.extraAttributes;
+  const { label, helperText, options } = element.extraAttributes;
 
   function toggleOption(opt: string) {
     const exists = selected.includes(opt);
@@ -152,10 +138,7 @@ function FormComponent({
 
   return (
     <div className="flex flex-col gap-2 w-full">
-      <Label className={cn(error && "text-red-500")}>
-        {label}
-        {required && "*"}
-      </Label>
+      <Label className={cn(error && "text-red-500")}>{label}</Label>
       <div
         className={cn(
           "flex flex-col gap-2",
@@ -205,7 +188,6 @@ function PropertiesComponent({
     defaultValues: {
       label: element.extraAttributes.label,
       helperText: element.extraAttributes.helperText,
-      required: element.extraAttributes.required,
       options: element.extraAttributes.options,
     },
   });
@@ -215,13 +197,12 @@ function PropertiesComponent({
   }, [element, form]);
 
   function applyChanges(values: propertiesFormSchemaType) {
-    const { label, helperText, required, options } = values;
+    const { label, helperText, options } = values;
     updateElement(element.id, {
       ...element,
       extraAttributes: {
         label,
         helperText,
-        required,
         options,
       },
     });
@@ -318,28 +299,6 @@ function PropertiesComponent({
               <FormDescription>
                 Define the checkbox options users can select (multiple allowed).
               </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Separator />
-        <FormField
-          control={form.control}
-          name="required"
-          render={({ field }) => (
-            <FormItem className="flex items-center justify-between rounded-lg border p-3 shadow-sm">
-              <div className="space-y-0.5">
-                <FormLabel>Required</FormLabel>
-                <FormDescription>
-                  Require at least one option to be selected.
-                </FormDescription>
-              </div>
-              <FormControl>
-                <Switch
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-              </FormControl>
               <FormMessage />
             </FormItem>
           )}

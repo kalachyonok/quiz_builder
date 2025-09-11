@@ -25,7 +25,6 @@ export const QUIZZES: Quizzes[] = [
         extraAttributes: {
           label: "Which car brand has a logo with four rings?",
           helperText: "",
-          required: false,
           options: ["BMW", "Audi", "Toyota"],
         },
       },
@@ -35,7 +34,6 @@ export const QUIZZES: Quizzes[] = [
         extraAttributes: {
           label: "Which of the following are Japanese car brands?",
           helperText: "",
-          required: false,
           options: ["Toyota", "Ford", "Honda"],
         },
       },
@@ -47,7 +45,6 @@ export const QUIZZES: Quizzes[] = [
             "Write the name of a car brand that starts with the letter “B”.",
           helperText: "Input the text above",
           placeHolder: "Value here...",
-          required: false,
         },
       },
       {
@@ -88,7 +85,6 @@ export const QUIZZES: Quizzes[] = [
         extraAttributes: {
           label: "Which car brand produces the Mustang?",
           helperText: "",
-          required: false,
           options: ["Ford", "Chevrolet", "Dodge"],
         },
       },
@@ -98,7 +94,6 @@ export const QUIZZES: Quizzes[] = [
         extraAttributes: {
           label: "Which of the following are luxury car brands?",
           helperText: "",
-          required: false,
           options: ["Lexus", "Lamborghini", "Hyundai"],
         },
       },

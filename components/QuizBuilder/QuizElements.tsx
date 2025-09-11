@@ -18,14 +18,11 @@ export type SubmitFunction = (key: string, value: string) => void;
 
 export type QuizElement = {
   type: ElementsType;
-
   construct: (id: string) => QuizElementInstance;
-
   quizBtnElement: {
     icon: IconType;
     label: string;
   };
-
   designerComponent: React.FC<{ elementInstance: QuizElementInstance }>;
   quizComponent: React.FC<{
     elementInstance: QuizElementInstance;

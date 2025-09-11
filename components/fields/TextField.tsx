@@ -23,7 +23,6 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { Switch } from "../ui/switch";
 import { cn } from "@/lib/utils";
 import { handleEnterKeyDown } from "@/utils/enterKeyDown";
 
@@ -32,7 +31,6 @@ const type: ElementsType = "TextField";
 const extraAttributes = {
   label: "Text field",
   helperText: "Input the text above",
-  required: false,
   placeHolder: "Value here...",
 };
 
@@ -40,7 +38,6 @@ const propertiesSchema = z.object({
   label: z.string().min(2).max(200),
   helperText: z.string().max(200),
   placeHolder: z.string().max(50),
-  required: z.boolean().default(false).optional(),
 });
 
 export const TextQuizFormElement: QuizElement = {
@@ -57,18 +54,7 @@ export const TextQuizFormElement: QuizElement = {
   designerComponent: DesignerComponent,
   quizComponent: FormComponent,
   propertiesComponent: PropertiesComponent,
-
-  validate: (
-    formElement: QuizElementInstance,
-    currentValue: string
-  ): boolean => {
-    const element = formElement as CustomInstance;
-    if (element.extraAttributes.required) {
-      return currentValue.length > 0;
-    }
-
-    return true;
-  },
+  validate: () => true,
 };
 
 type CustomInstance = QuizElementInstance & {
@@ -97,13 +83,10 @@ function FormComponent({
     setError(isInvalid === true);
   }, [isInvalid]);
 
-  const { label, required, placeHolder, helperText } = element.extraAttributes;
+  const { label, placeHolder, helperText } = element.extraAttributes;
   return (
     <div className="flex flex-col gap-2 w-full">
-      <Label className={cn(error && "text-red-500")}>
-        {label}
-        {required && "*"}
-      </Label>
+      <Label className={cn(error && "text-red-500")}>{label}</Label>
       <Input
         className={cn(error && "border-red-500")}
         placeholder={placeHolder}
@@ -137,13 +120,10 @@ function DesignerComponent({
   elementInstance: QuizElementInstance;
 }) {
   const element = elementInstance as CustomInstance;
-  const { label, placeHolder, helperText, required } = element.extraAttributes;
+  const { label, placeHolder, helperText } = element.extraAttributes;
   return (
     <div className="flex flex-col gap-2 w-full text-amber-950">
-      <Label>
-        {label}
-        {required && "*"}
-      </Label>
+      <Label>{label}</Label>
       <Input placeholder={placeHolder} />
       {helperText && (
         <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>
@@ -167,7 +147,6 @@ function PropertiesComponent({
       label: element.extraAttributes.label,
       helperText: element.extraAttributes.helperText,
       placeHolder: element.extraAttributes.placeHolder,
-      required: element.extraAttributes.required,
     },
   });
 
@@ -176,7 +155,7 @@ function PropertiesComponent({
   }, [element, form]);
 
   function applyChanges(values: propertiesFormSchemaType) {
-    const { label, helperText, placeHolder, required } = values;
+    const { label, helperText, placeHolder } = values;
 
     updateElement(element.id, {
       ...element,
@@ -184,7 +163,6 @@ function PropertiesComponent({
         label,
         helperText,
         placeHolder,
-        required,
       },
     });
   }
@@ -240,28 +218,6 @@ function PropertiesComponent({
                 The helper text of the field. <br />
                 It will be displayed below the field.
               </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="required"
-          render={({ field }) => (
-            <FormItem className="flex items-center justify-between rounded-lg border p-3 shadow-sm">
-              <div className="space-y-0.5">
-                <FormLabel>Required</FormLabel>
-                <FormDescription>
-                  The helper text of the field. <br />
-                  It will be displayed below the field.
-                </FormDescription>
-              </div>
-              <FormControl>
-                <Switch
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-              </FormControl>
               <FormMessage />
             </FormItem>
           )}

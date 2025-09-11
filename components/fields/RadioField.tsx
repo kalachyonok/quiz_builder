@@ -20,7 +20,6 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { Switch } from "../ui/switch";
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
 import { Button } from "../ui/button";
@@ -36,14 +35,12 @@ const type: ElementsType = "RadioField" as ElementsType;
 const extraAttributes = {
   label: "Radio field",
   helperText: "Helper text",
-  required: false,
   options: ["Option 1", "Option 2"],
 };
 
 const propertiesSchema = z.object({
   label: z.string().min(2).max(50),
   helperText: z.string().max(200),
-  required: z.boolean().default(false).optional(),
   options: z.array(z.string().min(1)).default([]).optional(),
 });
 
@@ -62,16 +59,7 @@ export const RadioFieldFormElement: QuizElement = {
   quizComponent: FormComponent,
   propertiesComponent: PropertiesComponent,
 
-  validate: (
-    formElement: QuizElementInstance,
-    currentValue: string
-  ): boolean => {
-    const element = formElement as CustomInstance;
-    if (element.extraAttributes.required) {
-      return currentValue.length > 0;
-    }
-    return true;
-  },
+  validate: () => true,
 };
 
 type CustomInstance = QuizElementInstance & {
@@ -84,13 +72,10 @@ function DesignerComponent({
   elementInstance: QuizElementInstance;
 }) {
   const element = elementInstance as CustomInstance;
-  const { label, required, helperText, options } = element.extraAttributes;
+  const { label, helperText, options } = element.extraAttributes;
   return (
     <div className="flex flex-col gap-2 w-full">
-      <Label>
-        {label}
-        {required && "*"}
-      </Label>
+      <Label>{label}</Label>
       <RadioGroup>
         {options.map((opt) => (
           <div key={opt} className="flex items-center space-x-2">
@@ -125,13 +110,10 @@ function FormComponent({
     setError(isInvalid === true);
   }, [isInvalid]);
 
-  const { label, required, helperText, options } = element.extraAttributes;
+  const { label, helperText, options } = element.extraAttributes;
   return (
     <div className="flex flex-col gap-2 w-full">
-      <Label className={cn(error && "text-red-500")}>
-        {label}
-        {required && "*"}
-      </Label>
+      <Label className={cn(error && "text-red-500")}>{label}</Label>
       <RadioGroup
         value={value}
         onValueChange={(val) => {
@@ -178,7 +160,6 @@ function PropertiesComponent({
     defaultValues: {
       label: element.extraAttributes.label,
       helperText: element.extraAttributes.helperText,
-      required: element.extraAttributes.required,
       options: element.extraAttributes.options,
     },
   });
@@ -188,13 +169,12 @@ function PropertiesComponent({
   }, [element, form]);
 
   function applyChanges(values: propertiesFormSchemaType) {
-    const { label, helperText, required, options } = values;
+    const { label, helperText, options } = values;
     updateElement(element.id, {
       ...element,
       extraAttributes: {
         label,
         helperText,
-        required,
         options,
       },
     });
@@ -291,28 +271,6 @@ function PropertiesComponent({
               <FormDescription>
                 Define the radio options displayed to the user.
               </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Separator />
-        <FormField
-          control={form.control}
-          name="required"
-          render={({ field }) => (
-            <FormItem className="flex items-center justify-between rounded-lg border p-3 shadow-sm">
-              <div className="space-y-0.5">
-                <FormLabel>Required</FormLabel>
-                <FormDescription>
-                  Determines whether an option must be selected.
-                </FormDescription>
-              </div>
-              <FormControl>
-                <Switch
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-              </FormControl>
               <FormMessage />
             </FormItem>
           )}
