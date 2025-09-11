@@ -5,12 +5,6 @@ import { QuizElements } from "@/components/QuizBuilder/QuizElements";
 import { useParams } from "next/navigation";
 import { Header } from "@/components/header";
 import { useQuizContext } from "@/hooks/useQuizContext";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Published Quiz",
-  description: "View the full details of this published quiz",
-};
 
 export default function QuizPage() {
   const { id } = useParams();
