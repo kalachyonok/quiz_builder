@@ -1,9 +1,9 @@
 "use client";
 
-import { Container } from "@/components/QuizContainer";
+import { QuizContainer } from "@/components/QuizContainer";
 import { QuizElements } from "@/components/QuizBuilder/QuizElements";
 import { useParams } from "next/navigation";
-import { Header } from "@/components/QuizHeader";
+import { QuizHeader } from "@/components/QuizHeader";
 import { useQuizContext } from "@/hooks/useQuizContext";
 
 export default function QuizPage() {
@@ -13,8 +13,8 @@ export default function QuizPage() {
   const quiz = quizzes.find((quiz) => quiz.id === Number(id));
 
   return (
-    <Container>
-      <Header quizId={Number(id)} viewMode={true} />
+    <QuizContainer>
+      <QuizHeader quizId={Number(id)} viewMode={true} />
       <div className="bg-accent min-h-screen flex flex-col items-center justify-center p-4 bg-[url(/paper.svg)] overflow-y-auto">
         <div className="max-w-[620px] flex flex-col gap-4 bg-background h-full w-full rounded-2xl p-8 overflow-y-auto">
           {!quiz && <p className="text-center">Quiz not found.</p>}
@@ -30,6 +30,6 @@ export default function QuizPage() {
             })}
         </div>
       </div>
-    </Container>
+    </QuizContainer>
   );
 }

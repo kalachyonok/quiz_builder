@@ -1,4 +1,4 @@
-import { Header } from "@/components/QuizHeader";
+import { QuizHeader } from "@/components/QuizHeader";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ export default function BuilderLayout({
 }>) {
   return (
     <div>
-      <Header />
+      <QuizHeader />
       {children}
     </div>
   );

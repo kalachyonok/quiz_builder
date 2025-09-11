@@ -1,6 +1,6 @@
 "use client";
 
-import { Container } from "@/components/QuizContainer";
+import { QuizContainer } from "@/components/QuizContainer";
 import { DataTable } from "@/components/DataTable";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -18,13 +18,13 @@ export default function HomePage() {
   }, []);
 
   return (
-    <Container>
+    <QuizContainer>
       <div className="container mx-auto">
         <Button asChild className="bg-red-700 cursor-pointer mb-8">
           <Link href="/quiz/edit/new">Create new Quiz</Link>
         </Button>
         <DataTable data={quizzes} />
       </div>
-    </Container>
+    </QuizContainer>
   );
 }

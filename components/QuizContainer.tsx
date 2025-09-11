@@ -6,7 +6,7 @@ type Props = ComponentProps<"div"> & {
   asChild?: boolean;
 };
 
-export const Container = ({
+export const QuizContainer = ({
   asChild = false,
   className,
   children,

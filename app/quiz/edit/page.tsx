@@ -1,12 +1,12 @@
-import { Container } from "@/components/QuizContainer";
+import { QuizContainer } from "@/components/QuizContainer";
 import { QuizBuilder } from "@/components/QuizBuilder/QuizBuilder";
-import { Header } from "@/components/QuizHeader";
+import { QuizHeader } from "@/components/QuizHeader";
 
 export default function BuilderPage() {
   return (
-    <Container>
-      <Header />
+    <QuizContainer>
+      <QuizHeader />
       <QuizBuilder />
-    </Container>
+    </QuizContainer>
   );
 }
