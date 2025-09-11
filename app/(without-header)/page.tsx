@@ -1,6 +1,6 @@
 "use client";
 
-import { Container } from "@/components/Container";
+import { Container } from "@/components/QuizContainer";
 import { DataTable } from "@/components/DataTable";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";

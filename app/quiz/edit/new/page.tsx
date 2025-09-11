@@ -1,7 +1,7 @@
 "use client";
-import { Container } from "@/components/Container";
+import { Container } from "@/components/QuizContainer";
 import { QuizBuilder } from "@/components/QuizBuilder/QuizBuilder";
-import { Header } from "@/components/Header";
+import { Header } from "@/components/QuizHeader";
 
 export default function NewQuizPage() {
   return (
