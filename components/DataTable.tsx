@@ -15,9 +15,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "../ui/button";
-import { useGetColumns } from "../../hooks/useGetColumn";
+import { useGetColumns } from "../hooks/useGetColumn";
 import { Quizzes } from "@/constants/quizzes";
+import { Button } from "./ui/button";
 
 interface DataTableProps {
   data: Quizzes[];

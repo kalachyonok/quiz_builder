@@ -1,7 +1,7 @@
 "use client";
 
-import { Container } from "@/components/container";
-import { DataTable } from "@/components/DataTable/DataTable";
+import { Container } from "@/components/Container";
+import { DataTable } from "@/components/DataTable";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useQuizContext } from "../../hooks/useQuizContext";

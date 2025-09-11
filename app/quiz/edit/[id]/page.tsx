@@ -1,10 +1,10 @@
 "use client";
-import { Container } from "@/components/container";
+import { Container } from "@/components/Container";
 import { QuizBuilder } from "@/components/QuizBuilder/QuizBuilder";
 import { useParams } from "next/navigation";
 import { useQuizContext } from "@/hooks/useQuizContext";
 import { useElementContext } from "@/hooks/useElementContext";
-import { Header } from "@/components/header";
+import { Header } from "@/components/Header";
 import { useEffect } from "react";
 
 export default function IndividualQuizPage() {

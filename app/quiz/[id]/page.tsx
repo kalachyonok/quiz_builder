@@ -1,9 +1,9 @@
 "use client";
 
-import { Container } from "@/components/container";
+import { Container } from "@/components/Container";
 import { QuizElements } from "@/components/QuizBuilder/QuizElements";
 import { useParams } from "next/navigation";
-import { Header } from "@/components/header";
+import { Header } from "@/components/Header";
 import { useQuizContext } from "@/hooks/useQuizContext";
 
 export default function QuizPage() {
