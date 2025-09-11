@@ -10,14 +10,11 @@ import { useState, useEffect } from "react";
 import { useQuizContext } from "@/hooks/useQuizContext";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { QuizIdentificationProps } from "@/types/common";
 
-export const QuizTitle = ({
-  quizId,
-  viewMode,
-}: {
-  quizId?: number;
-  viewMode?: boolean;
-}) => {
+type QuizTitleProps = QuizIdentificationProps;
+
+export const QuizTitle = ({ quizId, viewMode }: QuizTitleProps) => {
   const { elements, setElements } = useElementContext();
   const { addQuiz, updateQuiz, publishQuiz, quizzes } = useQuizContext();
   const [currentQuizId, setCurrentQuizId] = useState<number | null>(
@@ -48,7 +45,7 @@ export const QuizTitle = ({
     }
   }, [quizId, setElements]);
 
-  const onSaveHandler = () => {
+  const onSaveHandler = (): void => {
     if (title.trim().length === 0) {
       toast.error("Quiz is not saved - please enter a title");
       return;
@@ -83,7 +80,7 @@ export const QuizTitle = ({
     }
   };
 
-  const onPublishHandler = () => {
+  const onPublishHandler = (): void => {
     if (!currentQuizId) {
       toast.error("No quiz to publish");
       return;

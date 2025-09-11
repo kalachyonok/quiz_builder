@@ -2,7 +2,7 @@
 import { useElementContext } from "@/hooks/useElementContext";
 import { QuizElements } from "./QuizElements";
 
-export const RightSidebar = () => {
+export const RightSidebar: React.FC = () => {
   const { selectedElement, elements } = useElementContext();
 
   if (!selectedElement) {

@@ -3,7 +3,7 @@ import { SidebarBtnElement } from "./SidebarBtnElement";
 import { useState } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 
-export const LeftSidebar = () => {
+export const LeftSidebar: React.FC = () => {
   const [isQuestionOpen, setIsQuestionOpen] = useState(false);
 
   return (

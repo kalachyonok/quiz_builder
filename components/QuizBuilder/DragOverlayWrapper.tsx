@@ -1,17 +1,22 @@
 "use client";
 
-import { Active, DragOverlay, useDndMonitor } from "@dnd-kit/core";
+import {
+  Active,
+  DragOverlay,
+  DragStartEvent,
+  useDndMonitor,
+} from "@dnd-kit/core";
 import { useState } from "react";
 import { SidebarBtnElementDragOverlay } from "./SidebarBtnElement";
 import { ElementsType, QuizElements } from "./QuizElements";
 import { useElementContext } from "@/hooks/useElementContext";
 
-export const DragOverlayWrapper = () => {
+export const DragOverlayWrapper: React.FC = () => {
   const { elements } = useElementContext();
   const [draggedItem, setDraggedItem] = useState<Active | null>(null);
 
   useDndMonitor({
-    onDragStart: (event) => {
+    onDragStart: (event: DragStartEvent) => {
       setDraggedItem(event.active);
     },
     onDragCancel: () => {
