@@ -189,9 +189,9 @@ function DesignerElementWrapper({ element }: { element: QuizElementInstance }) {
   const DesignerComponent = QuizElements[element.type].designerComponent;
 
   return (
-    <div className="flex">
+    <div className="flex items-stretch">
       <div
-        className="relative h-[120px] flex flex-col border border-dashed border-gray-400 text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset w-full"
+        className="relative min-h-[120px] flex flex-col border border-dashed border-gray-400 text-foreground hover:cursor-pointer rounded-md ring-1 ring-accent ring-inset w-full"
         ref={draggable.setNodeRef}
         {...draggable.listeners}
         {...draggable.attributes}
@@ -219,7 +219,7 @@ function DesignerElementWrapper({ element }: { element: QuizElementInstance }) {
         )}
         <div
           className={cn(
-            "flex w-full h-[120px] items-center rounded-md bg-accent/40 px-4 py-2",
+            "flex w-full min-h-[120px] items-start rounded-md bg-accent/40 px-4 py-2",
             topHalf.isOver && "border-t-4 border-green-600",
             bottomHalf.isOver && "border-b-4 border-green-600"
           )}

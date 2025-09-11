@@ -73,11 +73,15 @@ function DesignerComponent({
 }) {
   const element = elementInstance as CustomInstance;
   const { label, helperText, options } = element.extraAttributes;
+
+  const displayOptions = options.slice(0, 4);
+  const hasMoreOptions = options.length > 4;
+
   return (
     <div className="flex flex-col gap-2 w-full">
       <Label>{label}</Label>
       <div className="flex flex-col gap-2">
-        {options.map((opt) => {
+        {displayOptions.map((opt) => {
           const id = `${element.id}-${opt}`;
           return (
             <div key={opt} className="flex items-center space-x-2">
@@ -86,6 +90,13 @@ function DesignerComponent({
             </div>
           );
         })}
+        {hasMoreOptions && (
+          <div className="flex items-center space-x-2 text-muted-foreground">
+            <span className="text-sm">
+              ... and {options.length - 4} more options
+            </span>
+          </div>
+        )}
       </div>
       {helperText && (
         <p className="text-muted-foreground text-[0.8rem]">{helperText}</p>
